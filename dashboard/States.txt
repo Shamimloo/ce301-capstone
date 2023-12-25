@@ -1,0 +1,93 @@
+#################### Teacher ####################
+
+Teacher permission
+0 - Normal 
+1 - Admin - Access all features
+
+Teacher Gender
+1 - Male
+2 - Female
+3 - Rather not say
+
+Teacher Designation
+1 - Teacher
+2 - Head of Department
+
+Teacher Department
+1 - English
+2 - Mathematics
+3 - Science
+
+Teacher status
+0 - Deleted (Cannot be seen in admin panel)
+1 - Inactive (Can be seen in admin panel)
+2 - Active
+
+#################### Student ####################
+
+Student status
+0 - Deleted (Cannot be seen in admin panel)
+1 - Inactive (Can be seen in admin panel)
+2 - Active
+
+#################### Student Level ####################
+
+Student Level status
+0 - Deleted (Cannot be seen in admin panel)
+1 - Inactive (Can be seen in admin panel)
+2 - Active
+
+#################### Student Class ####################
+
+Student Class status
+0 - Deleted (Cannot be seen in admin panel)
+1 - Inactive (Can be seen in admin panel)
+2 - Active
+
+#################### Student House ####################
+
+Student House status
+0 - Deleted (Cannot be seen in admin panel)
+1 - Inactive (Can be seen in admin panel)
+2 - Active
+
+#################### Info Page ####################
+
+Info Page status
+0 - Deleted (Cannot be seen in admin panel)
+1 - Draft (Can be seen in admin panel)
+2 - Published
+
+#################### Subject ####################
+
+Subject status
+0 - Deleted (Cannot be seen in admin panel)
+1 - Inactive (Can be seen in admin panel)
+2 - Active
+
+#################### Question ####################
+
+Question Type
+1 - Multiple Choice Text (1 option)
+2 - Multiple Answers Text (* option)
+3 - Multiple Choice True or False
+4 - Multiple Choice Image (1 option)
+
+Question status
+0 - Deleted (Cannot be seen in admin panel)
+1 - Inactive (Can be seen in admin panel)
+2 - Active
+
+#################### Quiz ####################
+
+Quiz status
+0 - Deleted (Cannot be seen in admin panel)
+1 - Inactive (Can be seen in admin panel)
+2 - Active
+
+#################### studentQuiz ####################
+
+studentQuiz status
+0 - Started quiz only, no ending
+1 - Started but time up
+2 - Started and completed

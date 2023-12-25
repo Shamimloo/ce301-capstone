@@ -1,0 +1,109 @@
+@media screen and (max-width: 1200px) {
+	#card-container-login {
+		border-radius: 60px 60px 0 0;
+	}
+
+	.score-msg-img {
+		width: 65%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.h2-title {
+		text-align: center;
+	}
+
+	h2 {
+		font-size: 32px;
+	}
+
+	h3 {
+		font-size: 28px;
+	}
+
+	h4 {
+		font-size: 20px;
+	}
+
+	h6 {
+		font-size: 16px;
+	}
+
+	.card-container {
+		justify-content: center;
+	}
+
+	.login-logo > img {
+		width: 80%;
+	}
+
+	.card-image {
+		height: 323px;
+	}
+
+	.question_score span,
+	.question_number span {
+		color: black;
+		font-size: 1rem;
+		font-weight: 800;
+		letter-spacing: 1px;
+	}
+
+	.question-image {
+		width: 80%;
+	}
+
+	.score-msg-img {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 578px) {
+	.login-logo > img {
+		width: 75%;
+	}
+
+	#card-container-login .card {
+		padding: 40px 20px;
+	}
+
+	.card-image {
+		height: 323px;
+	}
+
+	.question-image > img,
+	.img-answer {
+		width: 200px;
+		height: 200px;
+		border-radius: 15px;
+	}
+
+	#mainWrapper {
+		margin: -35px 0;
+	}
+
+	img.image-option {
+		height: 155px;
+		width: 155px;
+		border-radius: 10px;
+		margin: -10px 0;
+		display: inherit;
+		overflow: hidden;
+	}
+
+	.form_items > .labelQuestionType4 {
+		width: 165px;
+		height: 145px;
+		border-radius: 15px;
+	}
+
+	.form_items > .labelQuestionType4.mx-4 {
+		margin: 0 5px !important;
+	}
+
+	#submit-btn,
+	#explanation-btn {
+		margin-bottom: 60px !important;
+		scroll-margin: 60px !important;
+	}
+}

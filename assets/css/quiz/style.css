@@ -1,0 +1,664 @@
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.	Global css
+2. Login css
+3. Info css
+4. Quiz css 
+
+--------------------------------------------------------------*/
+
+/***
+
+====================================================================
+1.	Global css
+====================================================================
+
+***/
+
+:root {
+	--main-color-1: #63d297;
+	--main-color-2: #ffbd3b;
+	--main-text-color: #23234b;
+
+	--green-gradient-color-1: 0, 190, 141;
+	--green-gradient-color-2: 99, 210, 151;
+
+	--blue-gradient-color-1: 25, 141, 239;
+	--blue-gradient-color-2: 2, 190, 254;
+
+	--yellow-gradient-color-1: 255, 186, 26;
+	--yellow-gradient-color-2: 255, 230, 142;
+
+	--main-grey-color: #f5f7fb;
+	--error-color: #ff636c;
+	--success-color: #44c882;
+}
+
+body {
+	background-color: var(--main-grey-color);
+	background-size: cover;
+	background-attachment: fixed;
+	font-family: "DM Sans", sans-serif;
+	/* font-family: 'Lexend', sans-serif; */
+	color: var(--main-text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+}
+
+h1 {
+	font-weight: 600;
+	font-size: 56px;
+}
+
+h2 {
+	font-weight: 600;
+	font-size: 48px;
+}
+
+h3 {
+	font-weight: 600;
+	font-size: 40px;
+}
+
+h4 {
+	font-weight: 600;
+	font-size: 32px;
+}
+
+h5 {
+	font-weight: 600;
+	font-size: 24px;
+}
+
+h6 {
+	font-weight: 600;
+	font-size: 20px;
+}
+
+p {
+	font-weight: 500;
+	font-size: 16px;
+}
+
+a {
+	font-weight: 600;
+	font-size: 16px;
+}
+
+span {
+	font-size: 16px;
+}
+
+label.form-label,
+option,
+input,
+select.form-control {
+	font-family: "DM Sans", sans-serif;
+	/* font-family: 'Lexend', sans-serif; */
+	font-weight: 500;
+}
+
+input.form-control,
+select.form-control {
+	min-height: 55px;
+	border-radius: 25px;
+	padding-left: 30px;
+}
+
+section {
+	margin: 50px 0;
+}
+
+.card {
+	border-radius: 15px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border: none;
+}
+
+.btn:disabled {
+	background-color: rgb(213, 213, 213);
+	color: white;
+	border: none;
+	opacity: 100%;
+}
+
+.btn-primary,
+.btn-secondary {
+	min-width: 200px;
+	height: 50px;
+	padding: 10px 20px;
+	background-color: var(--main-color-2);
+	color: white;
+	font-weight: 500;
+	border-radius: 25px;
+	border: none;
+	--bs-btn-active-bg: #efb33a;
+	--bs-btn-hover-bg: #efb33a;
+	--bs-btn-hover-border-color: #efb33a;
+	--bs-btn-active-border-color: #efb33a;
+	--bs-btn-focus-shadow-rgb: transparent;
+}
+
+.btn-secondary {
+	color: var(--main-color-2);
+	border: 2px solid var(--main-color-2);
+	background-color: transparent;
+	--bs-btn-hover-bg: rgb(239, 179, 58, 0.5);
+}
+
+.btn-link {
+	color: var(--main-color-2);
+}
+
+.card-link,
+.card-link:visited,
+.card-link:hover,
+.card-link:active {
+	text-decoration: none;
+	color: black;
+}
+
+.card-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card-quiz {
+	border-radius: 10px;
+	height: 300px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.card-title {
+	font-size: 26px;
+	font-weight: bold;
+}
+
+.fw-semibold {
+	font-weight: 500 !important;
+}
+
+.arrow-down:after {
+	content: "\f078";
+}
+
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+	--bs-gutter-x: 3.5rem;
+}
+
+.w-60 {
+	width: 60%;
+}
+
+/***
+
+====================================================================
+2. Login css
+====================================================================
+
+***/
+
+.login-bg {
+	background-image: url(../../images/quiz/quiz-main-login-bg.png);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	/* position: relative;
+  overflow: hidden; */
+}
+
+#card-container-login {
+	margin: 0;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+}
+
+#card-container-login .card {
+	padding: 40px;
+	box-shadow: 0px 0px 20px 5px rgb(0, 0, 0, 0.15);
+}
+
+#card-container-login .card-body {
+	padding: 0;
+}
+
+.login-logo > img {
+	width: 60%;
+}
+
+select.form-control,
+select.form-control:focus {
+	background-color: var(--main-grey-color);
+	border: none;
+	color: #9aabc6;
+	box-shadow: none;
+}
+
+select.form-control:hover {
+	background-color: #eef0f5;
+	color: #99aac5;
+}
+
+.form-login {
+	margin-bottom: 42px;
+}
+
+/***
+
+====================================================================
+3. Info css
+====================================================================
+
+***/
+
+#body-quiz-info {
+	width: 100%;
+	height: 100px;
+	position: relative;
+}
+
+.info-bg,
+.quiz-bg {
+	width: 100%;
+	height: 400px;
+	position: absolute;
+	top: -230px;
+	background-image: url(../../images/quiz/quiz-info/quiz-info-element-bg.png);
+	background-size: cover;
+	background-repeat: none;
+	background-position: top;
+	background-color: white;
+	border-radius: 0 0 60px 60px;
+}
+
+#quiz-info {
+	position: relative;
+}
+
+.fa-arrow-right {
+	font-size: 20px;
+}
+
+.card-image {
+	margin-top: 35px;
+	position: relative;
+	height: 623px;
+	border-radius: 15px;
+	background-color: var(--main-grey-color);
+	overflow: hidden;
+}
+
+.card-image img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	object-fit: cover;
+}
+
+.card-body-container {
+	box-shadow: 0px 0px 20px 5px rgb(0, 0, 0, 0.1);
+}
+
+/***
+
+====================================================================
+4. Quiz css
+====================================================================
+
+***/
+
+#body-quiz-question {
+	width: 100%;
+	height: 100vh;
+	position: relative;
+}
+
+#mainWrapper {
+	margin: -35px 0;
+}
+
+.quiz-bg {
+	background-image: url(../../images/quiz/quiz-playthrough/quiz-main-bg.png);
+}
+
+.spacing {
+	width: 20px;
+}
+
+.hide {
+	display: none;
+}
+
+.active {
+	background-color: #f9bc31;
+}
+
+.correctOptions {
+	background-color: var(--success-color);
+}
+
+.wrongOptions {
+	background-color: var(--error-color);
+}
+
+h6.subject-name {
+	color: var(--main-color-2);
+}
+
+.question-image > img, .img-answer {
+	width: 300px;
+	height: 300px;
+	border-radius: 15px;
+}
+
+.modal-content {
+	border-radius: 15px;
+}
+
+.modal-content h3 {
+	margin: auto;
+}
+
+.line {
+	border: 1px solid #dbdbdb;
+}
+
+.img-answer {
+	border-radius: 14px;
+}
+
+.quiz-score {
+	font-weight: 600;
+	font-size: 56px;
+	line-height: 1;
+}
+
+.card-question {
+	min-height: 220px;
+	background-image: url(../../images/quiz/quiz-playthrough/quiz-card-elements.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: bottom;
+	position: relative;
+	overflow: hidden;
+}
+
+.card-question > img {
+	position: absolute;
+	z-index: -1;
+	bottom: -50px;
+	right: -100px;
+}
+
+.quiz-option {
+	margin-bottom: 15px;
+}
+
+img.image-option{
+	height: 300px;
+	width: 300px;
+	border-radius: 15px;
+	display: inherit;
+	overflow: hidden;
+}
+
+img.image-option-test{
+	width:75%;
+	border-radius: 15px;
+	margin: -10px 0;
+	display: inherit;
+	overflow: hidden;
+}
+
+.pass-quiz {
+	color: var(--success-color);
+}
+
+.fail-quiz {
+	color: var(--error-color);
+}
+
+.time-up {
+	color: grey;
+}
+
+.score-msg {
+	font-weight: 400;
+}
+
+.score-msg-img {
+	width: 45%;
+}
+
+.swal2-icon.swal2-warning {
+	border-color: var(--main-color-2) !important;
+	color: var(--main-color-2) !important;
+}
+
+.swal2-styled.swal2-confirm {
+	min-width: 200px;
+	box-shadow: none !important;
+	border-radius: 25px !important;
+	background-color: var(--main-color-2) !important;
+}
+
+.swal2-title {
+	font-size: 32px !important;
+	padding-top: 10px !important;
+}
+
+.swal2-popup {
+	border-radius: 15px !important;
+	color: var(--main-text-color) !important;
+}
+
+.swal2-html-container {
+	font-size: 16px !important;
+	margin-top: 10px !important;
+}
+
+.swal2-popup {
+    background-image: url('../../images/quiz/quiz-sweetalert-bg.png') !important;
+    background-position: bottom !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% !important;
+}
+
+#questionInstruction {
+	font-size: 12px;
+}
+
+/************* timer css **************/
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap");
+
+.timer {
+	text-align: center;
+	margin: auto;
+	/* width: 200px; */
+}
+
+.path--background {
+	fill: rgb(34, 213, 201);
+	stroke: white;
+	stroke-width: 0px;
+}
+
+.pulse {
+	fill: var(--error-color) !important;
+}
+
+.path--foreground {
+	fill: #e7edf9;
+	stroke: #e7edf9;
+	stroke-width: 0.5px;
+}
+
+.label {
+	/* font-family: 90px "Open Sans"; */
+	font-size: 24px;
+	font-weight: 900;
+	text-anchor: middle;
+	fill: rgb(34, 213, 201);
+}
+
+button.btn-primary > a {
+	text-decoration: none;
+	color: white;
+}
+
+/************* end of timer css **************/
+
+.content_box {
+	overflow: hidden;
+}
+
+.question_score span,
+.question_number span {
+	color: black;
+	font-size: 1.25rem;
+	font-weight: 800;
+	letter-spacing: 1px;
+}
+
+.question_score > span > h6,
+.question_number > span > h6 {
+	display: inline-block;
+}
+
+.fa-star {
+	color: var(--main-color-2);
+}
+
+.fa-circle-question {
+	color: rgb(var(--blue-gradient-color-2));
+}
+
+.question_title h1 {
+	font-size: 3.125rem;
+	font-weight: 800;
+}
+
+.form_items label {
+	width: 100%;
+	padding: 1rem 0.5rem;
+	font-size: 1.5rem;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.form_items label input {
+	display: none;
+}
+
+.form_items label.active {
+	background-color: #f9bc31 !important;
+}
+
+.form_items>.labelQuestionType4 {
+	width: 330px;
+	height: 330px;
+	border-radius: 15px;
+}
+
+.circle {
+	color: white;
+	left: 13px;
+	-webkit-transform: translateY(-25%);
+	transform: translateY(-25%);
+}
+
+.bi-check-circle,
+.bi-x-circle {
+	color: white;
+	border-color: white;
+}
+
+.prev_btn {
+	bottom: 5%;
+	left: 33%;
+	background-color: #dbdbdb;
+}
+
+.prev_btn:hover {
+	color: #ffffff;
+	background-color: #f9bc31;
+}
+
+@media screen and (max-width: 1199.98px) {
+	.question_title h1 {
+		font-size: 2.5rem;
+	}
+
+	.form_items label {
+		width: 100%;
+	}
+
+	.prev_btn {
+		left: 35%;
+	}
+}
+@media screen and (max-width: 991.98px) {
+	.question_title h1 {
+		font-size: 2rem;
+	}
+
+	.prev_btn {
+		left: 30%;
+	}
+}
+@media screen and (max-width: 767.98px) {
+	.logo_area {
+		text-align: center;
+		display: block;
+		margin-left: 0rem !important;
+		margin-bottom: 2rem;
+	}
+
+	.question_number,
+	.question_score {
+		text-align: center;
+	}
+
+	.question_title h1 {
+		text-align: center;
+		padding: 0rem 1rem;
+	}
+
+	.prev_btn {
+		left: 15%;
+	}
+}
+@media screen and (max-width: 575.98px) {
+	.question_title h1 {
+		font-size: 1.5rem;
+	}
+
+	.form_items label {
+		font-size: 1rem;
+	}
+
+	.prev_btn {
+		left: 13%;
+	}
+}
