@@ -1,12 +1,12 @@
 <?php
 //Define page name
-$pageName = "Edit Student";
+$pageName = "Edit Learner";
 //Include Header
 include 'assets/templates/dashboard/header.php';
 include 'assets/templates/dashboard/auth/header.php';
 ?>
 
-<body class="sidebar-expand">
+<body group="sidebar-expand">
   <!---------- Sidebar / Navbar Include ---------->
   <?php
   include 'assets/templates/dashboard/sidebar.php';
@@ -14,155 +14,110 @@ include 'assets/templates/dashboard/auth/header.php';
   ?>
 
   <!---------- Main Content ---------->
-  <div class="main">
-    <div class="main-content dashboard">
-      <div class="col-12 mt-5">
-        <div class="row">
-          <div class="col-12 box my-5">
+  <div group="main">
+    <div group="main-content dashboard">
+      <div group="col-12 mt-5">
+        <div group="row">
+          <div group="col-12 box my-5">
             <?php
 
-            //Query the student 
-            $studentDBQuery = DB::query("SELECT * FROM `student` WHERE studentID=%i", $_GET["studentID"]);
-            foreach ($studentDBQuery as $studentDBQueryResult) {
-              $studentDBQueryID = $studentDBQueryResult["studentID"];
-              $studentDBQueryName = $studentDBQueryResult["studentName"];
-              $studentDBQueryIndex = $studentDBQueryResult["studentIndex"];
-              $studentDBQueryYear = $studentDBQueryResult["studentYear"];
-              $studentDBQueryStatus = $studentDBQueryResult["studentStatus"];
-              $studentDBQueryClass = $studentDBQueryResult["classID"];
-              $studentDBQueryHouse = $studentDBQueryResult["houseID"];
+            //Query the learner 
+            $learnerDBQuery = DB::query("SELECT * FROM `learner` WHERE learnerID=%i", $_GET["learnerID"]);
+            foreach ($learnerDBQuery as $learnerDBQueryResult) {
+              $learnerDBQueryID = $learnerDBQueryResult["learnerID"];
+              $learnerDBQueryName = $learnerDBQueryResult["learnerName"];
+              $learnerDBQueryIndex = $learnerDBQueryResult["learnerIndex"];
+              $learnerDBQueryYear = $learnerDBQueryResult["learnerYear"];
+              $learnerDBQueryStatus = $learnerDBQueryResult["learnerStatus"];
+              $learnerDBQueryGroup = $learnerDBQueryResult["groupID"];
             }
 
             //ISSET POST form - Add Page
-            if (isset($_POST["editStudent"])) {
+            if (isset($_POST["editLearner"])) {
 
               //ISSET POST form - Filter Inputs
-              $editStudentName = filterInput($_POST["editStudentName"]);
-              $editStudentIndex = filterInput($_POST["editStudentIndex"]);
+              $editLearnerName = filterInput($_POST["editLearnerName"]);
+              $editLearnerIndex = filterInput($_POST["editLearnerIndex"]);
+
 
               //ISSET POST - Status Add DropDown field
-              if (empty($_POST["editStudentYear"])) {
-                $editStudentYear = null;
+              if (empty($_POST["editLearnerStatus"])) {
+                $editLearnerStatus = null;
               } else {
-                $editStudentYear = $_POST["editStudentYear"];
+                $editLearnerStatus = $_POST["editLearnerStatus"];
               }
 
-              //ISSET POST - Status Add DropDown field
-              if (empty($_POST["editStudentStatus"])) {
-                $editStudentStatus = null;
+              //ISSET POST - Group Add DropDown field
+              if (empty($_POST["editGroupID"])) {
+                $editGroupID = null;
               } else {
-                $editStudentStatus = $_POST["editStudentStatus"];
+                $editGroupID = $_POST["editGroupID"];
               }
 
-              //ISSET POST - Class Add DropDown field
-              if (empty($_POST["editClassID"])) {
-                $editClassID = null;
-              } else {
-                $editClassID = $_POST["editClassID"];
-              }
-
-              //ISSET POST - House Add DropDown field
-              if (empty($_POST["editHouseID"])) {
-                $editHouseID = null;
-              } else {
-                $editHouseID = $_POST["editHouseID"];
-              }
 
               //check if required inputs are not empty
-              if ($editStudentName == "" ||  $editStudentIndex == "") {
+              if ($editLearnerName == "" ||  $editLearnerIndex == "") {
                 authErrorMsg("Please fill up all the required fields.");
               } else {
-                //Update student in DB
+                //Update learner in DB
                 DB::startTransaction();
-                DB::update('student', [
-                  'studentName' => $editStudentName,
-                  'studentIndex' => $editStudentIndex,
-                  'studentYear' => $editStudentYear,
-                  'studentStatus' => $editStudentStatus,
-                  'classID' => $editClassID,
-                  'houseID' => $editHouseID,
-                ], "studentID=%i", $studentDBQueryID);;
+                DB::update('learner', [
+                  'learnerName' => $editLearnerName,
+                  'learnerStatus' => $editLearnerStatus,
+                  'groupID' => $editGroupID,
+                ], "learnerID=%i", $learnerDBQueryID);;
 
-                //Student successfully updated
+                //Learner successfully updated
                 $success = DB::affectedRows();
                 if ($success) {
                   DB::commit();
-                  sweetAlertTimerRedirect('Edit Student', 'Student successfully edited!', 'success', (SITE_URL . "student-summary"));
+                  sweetAlertTimerRedirect('Edit Learner', 'Learner successfully edited!', 'success', (SITE_URL . "learner-summary"));
                 } else {
                   DB::rollback();
-                  sweetAlertTimerRedirect('Edit Student', 'No changes recorded!', 'success', (SITE_URL . "student-summary"));
+                  sweetAlertTimerRedirect('Edit Learner', 'No changes recorded!', 'success', (SITE_URL . "learner-summary"));
                 }
               }
             }
             ?>
 
             <!---------- Main Title ---------->
-            <div class="p-3 py-5">
-              <div class="d-flex justify-content-between align-items-center mb-30">
-                <h4 class="text-right">Add New</h4>
+            <div group="p-3 py-5">
+              <div group="d-flex justify-content-between align-items-center mb-30">
+                <h4 group="text-right">Add New</h4>
               </div>
 
               <!---------Form ---------->
               <form method="POST">
-                <div class="mt-10">
-                  <label for="editStudentName" class="labels">Name*</label>
-                  <input type="text" name="editStudentName" id="editStudentName" class="form-control" placeholder="Enter student name" value="<?php echo $studentDBQueryName ?>">
+                <div group="mt-10">
+                  <label for="editLearnerName" group="labels">Name*</label>
+                  <input type="text" name="editLearnerName" id="editLearnerName" group="form-control" placeholder="Enter learner name" value="<?php echo $learnerDBQueryName ?>">
                 </div>
-                <div class="row">
-                  <div class="col-lg-6 col-md-12 col-sm-12 mt-30">
-                    <label for="editStudentIndex" class="labels">Index*</label>
-                    <input type="number" name="editStudentIndex" id="editStudentIndex" class="form-control" placeholder="Enter student index" value="<?php echo $studentDBQueryIndex ?>">
-                  </div>
-                  <div class="col-lg-6 col-md-12 col-sm-12 mt-30">
-                    <label for="editStudentYear" class="labels">Year*</label>
-                    <select name="editStudentYear" class="form-control form-select-option" id='editStudentYear' value="<?php echo $studentDBQueryYear ?>"> </select>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-sm-12 mt-30"><label class="labels">Status*</label>
-                    <br><select class="form-select form-select-option" name="editStudentStatus" aria-label="Default select example">
+                <div group="row">
+                  <div group="col-lg-4 col-md-4 col-sm-12 mt-30"><label group="labels">Status*</label>
+                    <br><select group="form-select form-select-option" name="editLearnerStatus" aria-label="Default select example">
                       <option disabled>Actions: </option>
-                      <option <?php if ($studentDBQueryStatus == 2) {
+                      <option <?php if ($learnerDBQueryStatus == 2) {
                                 echo 'selected';
                               } ?> value="2">Active</option>
-                      <option <?php if ($studentDBQueryStatus == 1) {
+                      <option <?php if ($learnerDBQueryStatus == 1) {
                                 echo 'selected';
                               } ?> value="1">Inactive</option>
                     </select>
                   </div>
-                  <div class="col-lg-4 col-md-4 col-sm-12 mt-30">
-                    <label for="editClassID" class="labels">Class*</label> <br>
-                    <select class="form-select form-select-option" name="editClassID" id="editClassID">
-                      <option disabled>Select Class: </option>
+                  <div group="col-lg-4 col-md-4 col-sm-12 mt-30">
+                    <label for="editGroupID" group="labels">Group*</label> <br>
+                    <select group="form-select form-select-option" name="editGroupID" id="editGroupID">
+                      <option disabled>Select Learner Group: </option>
                       <?php
-                      $queryDBClass = DB::query("SELECT * FROM `class` WHERE classStatus=%i", 2);
-                      //Populate all the possible active classes
-                      foreach ($queryDBClass as $queryDBClassResults) {
-                        $queryDBClassID = $queryDBClassResults["classID"];
-                        $queryDBClassName = $queryDBClassResults["className"];
+                      $queryDBGroup = DB::query("SELECT * FROM `group` WHERE groupStatus=%i", 2);
+                      //Populate all the possible active groupes
+                      foreach ($queryDBGroup as $queryDBGroupResults) {
+                        $queryDBGroupID = $queryDBGroupResults["groupID"];
+                        $queryDBGroupName = $queryDBGroupResults["groupName"];
                       ?>
-                        <option value="<?php echo $queryDBClassID; ?>" <?php if ($queryDBClassID == $studentDBQueryClass) {
+                        <option value="<?php echo $queryDBGroupID; ?>" <?php if ($queryDBGroupID == $learnerDBQueryGroup) {
                                                                           echo 'selected';
-                                                                        } ?>><?php echo $queryDBClassName; ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-12 mt-30">
-                    <label for="editHouseID" class="labels">House*</label><br>
-                    <select class="form-select form-select-option" name="editHouseID" id="editHouseID">
-                      <option disabled>Select House: </option>
-                      <?php
-                      $queryDBHouse = DB::query("SELECT * FROM `house` WHERE houseStatus=%i", 2);
-                      //Populate all the possible active houses
-                      foreach ($queryDBHouse as $queryDBHouseResults) {
-                        $queryDBHouseID = $queryDBHouseResults["houseID"];
-                        $queryDBHouseName = $queryDBHouseResults["houseName"];
-                      ?>
-                        <option value="<?php echo $queryDBHouseID; ?>" <?php if ($queryDBHouseID == $studentDBQueryHouse) {
-                                                                          echo 'selected';
-                                                                        } ?>><?php echo $queryDBHouseName; ?></option>
+                                                                        } ?>><?php echo $queryDBGroupName; ?></option>
                       <?php
                       }
                       ?>
@@ -171,9 +126,9 @@ include 'assets/templates/dashboard/auth/header.php';
                 </div>
 
                 <!--------- Actionables ---------->
-                <div class="d-flex align-items-center justify-content-end mt-40">
-                  <a href="<?php echo SITE_URL . "student-summary" ?>" class="btn-tertiary link-grey">Cancel</a>
-                  <button class="btn btn-primary profile-button ml-50" name="editStudent" type="submit">Update Student</button>
+                <div group="d-flex align-items-center justify-content-end mt-40">
+                  <a href="<?php echo SITE_URL . "learner-summary" ?>" group="btn-tertiary link-grey">Cancel</a>
+                  <button group="btn btn-primary profile-button ml-50" name="editLearner" type="submit">Update Learner</button>
                 </div>
               </form>
             </div>
@@ -183,7 +138,7 @@ include 'assets/templates/dashboard/auth/header.php';
     </div>
   </div>
 
-  <div class="overlay"></div>
+  <div group="overlay"></div>
 
   <!---------- Footer Include ---------->
   <?php
@@ -193,19 +148,6 @@ include 'assets/templates/dashboard/auth/header.php';
   <script>
     //CKEditor.js
     CKEDITOR.replace('addPageDescription');
-
-    let dateDropdown = document.getElementById('editStudentYear');
-
-    let currentYear = new Date().getFullYear();
-    let earliestYear = 2000;
-
-    while (currentYear >= earliestYear) {
-      let dateOption = document.createElement('option');
-      dateOption.text = currentYear;
-      dateOption.value = currentYear;
-      dateDropdown.add(dateOption);
-      currentYear -= 1;
-    }
   </script>
 
 

@@ -4,6 +4,7 @@ $pageName = "Quiz Info";
 
 include 'assets/templates/quiz/header.php';
 
+//Check if the session has pageID and quizID
 if (empty($_SESSION["pageID"]) || empty($_SESSION["quizID"])) {
   sweetAlertTimerRedirect("Invalid Session", "Please Log In", "error", SITE_URL . "quizzes-login");
 }

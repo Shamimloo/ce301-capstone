@@ -75,20 +75,14 @@ $addLearnerName = $addLearnerStatus = $addClassID = $addHouseID = $addLearnerInd
                 DB::query("SELECT `learnerID` FROM `learner` WHERE learnerIndex=%i AND groupID=%i AND learnerStatus>%i", $convertCol1, $addClassID, 0);
                 $indexNumberTaken = DB::count();
 
-                // Check if the house input exists in the database
-                $houseExists = DB::query("SELECT `houseID` FROM `house` WHERE houseID=%i", $convertCol3);
-
                 if ($convertCol1 == false || $convertCol2 == false || $convertCol3 == false) {
                   $errorspotted = 1;
                   break;
                 } elseif ($indexNumberTaken > 0) {
                   $errorspotted = 2;
                   break;
-                } elseif (!$houseExists) {
-                  $errorspotted = 4;
-                  break;
                 } elseif (!$getData[2]) {
-                  $errorspotted = 5;
+                  $errorspotted = 3;
                   break;
                 }
 
@@ -106,12 +100,8 @@ $addLearnerName = $addLearnerStatus = $addClassID = $addHouseID = $addLearnerInd
                 authErrorMsg("Errors spotted in the file. Please amend to follow the template file given!");
               } elseif ($errorspotted == 2) {
                 authErrorMsg("An index number already exists.");
-              } elseif ($errorspotted == 4) {
-                authErrorMsg("A house ID does not exist.");
-              } elseif ($errorspotted == 5) {
+              } elseif ($errorspotted == 3) {
                 authErrorMsg("All learner names are required.");
-              } elseif ($errorspotted == 6) {
-                authErrorMsg("Duplicate learner index numbers were found.");
               } else {
                 // If all rows are valid, perform a bulk insert
                 DB::startTransaction();
@@ -134,89 +124,140 @@ $addLearnerName = $addLearnerStatus = $addClassID = $addHouseID = $addLearnerInd
             ?>
             <div class="p-3 py-5">
               <!-- Main Title -->
-              <div>
+              <!-- <div>
                 <h4 class="text-right">Import File</h4>
                 <p>Download the template <a href="https://drive.google.com/uc?export=download&id=1M2X2O8tBvLssayLaxpvEgtDKEon0mwfy" class="btn-tertiary" download>here</a>. <br />Please fill in the <b>Index Numbers</b>, <b>Status</b>, <b>Name</b>, and <b>House ID</b> according to the ID column in the <a style="color:#eabe03;" href="<?php echo SITE_URL . "learnerhouse-summary" ?>" target="_blank">Learner House</a> page. Ensure that there are <b>no duplicate index numbers</b> in the group and <b>all fields are required</b>.</p>
-              </div>
+              </div> -->
 
               <!-- Upload File Form -->
-              <form method="post" enctype="multipart/form-data">
+              <!-- <form method="post" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-lg-6 col-md-12 col-sm-12 mt-20">
                     <input type="file" name="importLearnerList" id="uploadLearnerList" class="form-control" accept=".csv,.xls,.xlsx" value="<?php echo $uploadFile ?>">
                   </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 mt-20">
                     <select class="form-select form-select-option" name="addClassID" id="addClassID" onchange="getClass(this.value);">
-                      <option selected="true" disabled="disabled">Select Group</option>
-                      <?php
-                      $queryDBClass = DB::query("SELECT * FROM `group`");
-                      // Populate all the possible groups
-                      foreach ($queryDBClass as $queryDBClassResults) {
-                        $queryDBClassID = $queryDBClassResults["groupID"];
-                        $queryDBClassName = $queryDBClassResults["groupName"];
-                      ?>
-                        <option value="<?php echo $queryDBClassID; ?>" <?php if ($queryDBClassID == $addClassID) {
-                                                                          echo 'selected';
-                                                                        } ?>><?php echo $queryDBClassName; ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
-                  </div>
-                  <!-- Actionables -->
-                  <div class="d-flex justify-content-end align-items-center mt-30">
+                      <option selected="true" disabled="disabled">Select Group</option> -->
+              <?php
+              // $queryDBClass = DB::query("SELECT * FROM `group`");
+              // // Populate all the possible groups
+              // foreach ($queryDBClass as $queryDBClassResults) {
+              //   $queryDBClassID = $queryDBClassResults["groupID"];
+              //   $queryDBClassName = $queryDBClassResults["groupName"];
+              ?>
+              <option value="<?php echo $queryDBClassID; ?>" <?php if ($queryDBClassID == $addClassID) {
+                                                                echo 'selected';
+                                                              } ?>><?php echo $queryDBClassName; ?></option>
+              <?php
+              // }
+              ?>
+              </select>
+            </div>
+            <!-- Actionables -->
+            <!-- <div class="d-flex justify-content-end align-items-center mt-30">
                     <button class="btn btn-primary profile-button" name="importFile" type="submit">Upload</button>
                   </div>
+                </div> -->
+            <!-- </form> -->
+
+            <div class="d-flex justify-content-between align-items-center mt-30 mb-20">
+              <div class="line w-45 mt-50 mb-20"></div>
+              <h6 class="mt-50 mb-20 disabled-text">OR</h6>
+              <div class="line w-45 mt-50 mb-20"></div>
+
+              <!-- Main Title -->
+              <div class="d-flex justify-content-between align-items-center mb-30">
+                <h4 class="text-right">Add New Learner</h4>
+              </div>
+
+              <!-- Form for Adding Individual Learner -->
+              <form method="POST">
+                <div class="mt-10">
+                  <label for="addLearnerName" class="labels">Name*</label>
+                  <input type="text" name="addLearnerName" id="addLearnerName" class="form-control" placeholder="Enter learner name" value="<?php echo $addLearnerName ?>">
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-12 mt-30">
+                    <label class="labels">Status*</label>
+                    <br>
+                    <select class="form-select form-select-option" name="addLearnerStatus" aria-label="Default select example">
+                      <option disabled>Select Status</option>
+                      <option <?php if ($addLearnerStatus == 1) {
+                                echo 'selected';
+                              } ?> value="1">Inactive</option>
+                      <option <?php if ($addLearnerStatus == 2) {
+                                echo 'selected';
+                              } ?> value="2">Active</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-12 mt-30">
+                    <label for="addGroupID" class="labels">Group*</label>
+                    <br>
+                    <select class="form-select form-select-option" name="addGroupID" id="addGroupID">
+                      <option selected="true" disabled="disabled">Select Group</option>
+                      <?php
+                      $queryDBGroup = DB::query("SELECT * FROM `learnerGroup`");
+                      foreach ($queryDBGroup as $queryDBGroupResults) {
+                        $queryDBGroupID = $queryDBGroupResults["groupID"];
+                        $queryDBGroupName = $queryDBGroupResults["groupName"];
+                      ?>
+                        <option value="<?php echo $queryDBGroupID; ?>" <?php if ($queryDBGroupID == $addGroupID) {
+                                                                          echo 'selected';
+                                                                        } ?>><?php echo $queryDBGroupName; ?></option>
+                        <?php
+
+                        // Check if the "addLearner" POST request is set
+                        if (isset($_POST["addLearner"])) {
+                          // Sanitize and retrieve input data
+                          $addLearnerName = filterInput($_POST["addLearnerName"]);
+                          $addLearnerStatus = isset($_POST["addLearnerStatus"]) ? $_POST["addLearnerStatus"] : null;
+                          $addGroupID = isset($_POST["addGroupID"]) ? $_POST["addGroupID"] : null;
+
+                          // Validate required fields
+                          if (empty($addLearnerName) || empty($addGroupID)) {
+                            authErrorMsg("Please fill up all the required fields.");
+                          } else {
+                            // Check if the learner exists in the database
+                            DB::query("SELECT `learnerID` FROM `learner` WHERE learnerName=%s", $addLearnerName);
+                            $learnerExists = DB::count();
+
+                            if ($learnerExists) {
+                              sweetAlertTimerRedirect('Add Learner', 'Learner already exists in the system.', 'error', (SITE_URL . "learner-summary"));
+                            } else {
+                              // Insert the learner into the database
+                              DB::startTransaction();
+                              DB::insert('learner', [
+                                'learnerName' => $addLearnerName,
+                                'learnerStatus' => $addLearnerStatus,
+                                'groupID' => $addGroupID,
+                                'learnerDateCreated' => date("Y-m-d H:i:s"),
+                                'learnerDateUpdated' => date("Y-m-d H:i:s"),
+                              ]);
+
+                              // Check if the insertion was successful
+                              $success = DB::affectedRows();
+                              if ($success) {
+                                DB::commit();
+                                sweetAlertTimerRedirect('Add Learner', 'Learner successfully added!', 'success', (SITE_URL . "learner-summary"));
+                              } else {
+                                DB::rollback();
+                                sweetAlertTimerRedirect('Add Learner', 'No changes were recorded.', 'error', (SITE_URL . "learner-summary"));
+                              }
+                            }
+                          }
+                        ?>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Actionables -->
+                <div class="d-flex align-items-center justify-content-end mt-40">
+                  <a href="<?php echo SITE_URL . "learner-summary" ?>" class="btn-tertiary link-grey">Cancel</a>
+                  <button class="btn btn-primary profile-button ml-50" name="addLearner" type="submit">Add Learner</button>
                 </div>
               </form>
 
-              <div class="d-flex justify-content-between align-items-center mt-30 mb-20">
-                <div class="line w-45 mt-50 mb-20"></div>
-                <h6 class="mt-50 mb-20 disabled-text">OR</h6>
-                <div class="line w-45 mt-50 mb-20"></div>
-                <!-- ... (previous code) ... -->
-
-                <!-- Main Title -->
-                <div class="d-flex justify-content-between align-items-center mb-30">
-                  <h4 class="text-right">Add New Learner</h4>
-                </div>
-
-                <!-- Form for Adding Individual Learner -->
-                <form method="POST">
-                  <div class="mt-10">
-                    <label for="addLearnerName" class="labels">Name*</label>
-                    <input type="text" name="addLearnerName" id="addLearnerName" class="form-control" placeholder="Enter learner name" value="<?php echo $addLearnerName ?>">
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12 mt-30">
-                      <label class="labels">Status*</label>
-                      <br>
-                      <select class="form-select form-select-option" name="addLearnerStatus" aria-label="Default select example">
-                        <option disabled>Select Status</option>
-                        <option <?php if ($addLearnerStatus == 1) {
-                                  echo 'selected';
-                                } ?> value="1">Inactive</option>
-                        <option <?php if ($addLearnerStatus == 2) {
-                                  echo 'selected';
-                                } ?> value="2">Active</option>
-                      </select>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 mt-30">
-                      <label for="addGroupID" class="labels">Group*</label>
-                      <br>
-                      <select class="form-select form-select-option" name="addGroupID" id="addGroupID">
-                        <option selected="true" disabled="disabled">Select Group</option>
-                        <?php
-                        $queryDBGroup = DB::query("SELECT * FROM `learnerGroup`");
-                        foreach ($queryDBGroup as $queryDBGroupResults) {
-                          $queryDBGroupID = $queryDBGroupResults["groupID"];
-                          $queryDBGroupName = $queryDBGroupResults["groupName"];
-                        ?>
-                          <option value="<?php echo $queryDBGroupID; ?>" <?php if ($queryDBGroupID == $addGroupID) {
-                                                                            echo 'selected';
-                                                                          } ?>><?php echo $queryDBGroupName; ?></option>
-                          <?php
-
+          <?php
                           // Check if the "addLearner" POST request is set
                           if (isset($_POST["addLearner"])) {
                             // Sanitize and retrieve input data
@@ -256,70 +297,16 @@ $addLearnerName = $addLearnerStatus = $addClassID = $addHouseID = $addLearnerInd
                                 }
                               }
                             }
-                          ?>
-                      </select>
-                    </div>
-                  </div>
-
-                  <!-- Actionables -->
-                  <div class="d-flex align-items-center justify-content-end mt-40">
-                    <a href="<?php echo SITE_URL . "learner-summary" ?>" class="btn-tertiary link-grey">Cancel</a>
-                    <button class="btn btn-primary profile-button ml-50" name="addLearner" type="submit">Add Learner</button>
-                  </div>
-                </form>
-
-            <?php
-                            // Check if the "addLearner" POST request is set
-                            if (isset($_POST["addLearner"])) {
-                              // Sanitize and retrieve input data
-                              $addLearnerName = filterInput($_POST["addLearnerName"]);
-                              $addLearnerStatus = isset($_POST["addLearnerStatus"]) ? $_POST["addLearnerStatus"] : null;
-                              $addGroupID = isset($_POST["addGroupID"]) ? $_POST["addGroupID"] : null;
-
-                              // Validate required fields
-                              if (empty($addLearnerName) || empty($addGroupID)) {
-                                authErrorMsg("Please fill up all the required fields.");
-                              } else {
-                                // Check if the learner exists in the database
-                                DB::query("SELECT `learnerID` FROM `learner` WHERE learnerName=%s", $addLearnerName);
-                                $learnerExists = DB::count();
-
-                                if ($learnerExists) {
-                                  sweetAlertTimerRedirect('Add Learner', 'Learner already exists in the system.', 'error', (SITE_URL . "learner-summary"));
-                                } else {
-                                  // Insert the learner into the database
-                                  DB::startTransaction();
-                                  DB::insert('learner', [
-                                    'learnerName' => $addLearnerName,
-                                    'learnerStatus' => $addLearnerStatus,
-                                    'groupID' => $addGroupID,
-                                    'learnerDateCreated' => date("Y-m-d H:i:s"),
-                                    'learnerDateUpdated' => date("Y-m-d H:i:s"),
-                                  ]);
-
-                                  // Check if the insertion was successful
-                                  $success = DB::affectedRows();
-                                  if ($success) {
-                                    DB::commit();
-                                    sweetAlertTimerRedirect('Add Learner', 'Learner successfully added!', 'success', (SITE_URL . "learner-summary"));
-                                  } else {
-                                    DB::rollback();
-                                    sweetAlertTimerRedirect('Add Learner', 'No changes were recorded.', 'error', (SITE_URL . "learner-summary"));
-                                  }
-                                }
-                              }
-                            }
                           }
                         }
-            ?>
-
-
-              </div>
+                      }
+          ?>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <!-- End of Main Content -->

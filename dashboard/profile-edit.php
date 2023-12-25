@@ -6,15 +6,15 @@ include 'assets/templates/dashboard/header.php';
 include 'assets/templates/dashboard/auth/header.php';
 
 //Create an array of details
-$teacherNewDetails = array(
-  // 'teacherName' => $teacherDBName,
-  // 'teacherEmail',
-  // 'teacherPassword',
-  // 'teacherDepartment',
-  // 'teacherDesignation',
-  // 'teacherGender',
-  // 'teacherPhone',
-  // 'teacherProfileImage'
+$facilitatorNewDetails = array(
+  // 'facilitatorName' => $facilitatorDBName,
+  // 'facilitatorEmail',
+  // 'facilitatorPassword',
+  // 'facilitatorDepartment',
+  // 'facilitatorDesignation',
+  // 'facilitatorGender',
+  // 'facilitatorPhone',
+  // 'facilitatorProfileImage'
 );
 ?>
 
@@ -34,88 +34,83 @@ $teacherNewDetails = array(
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
               <div class="avatar fs-2">
                 <div class="profile-img">
-                  <?php if (!$teacherDBPicture) {
-                    echo '<p>' . makeInitials($teacherDBName) . '</p>';
+                  <?php if (!$facilitatorDBPicture) {
+                    echo '<p>' . makeInitials($facilitatorDBName) . '</p>';
                   } else {
-                    echo '<img src="assets/images/profile/' . $teacherDBPicture . '">';
+                    echo '<img src="assets/images/profile/' . $facilitatorDBPicture . '">';
                   } ?>
                 </div>
               </div>
-              <h6 class="pt-3 mb-0"><?php echo $teacherDBName ?></h6>
-              <span class="text-black-50 pt-2"><?php echo $teacherDBEmail ?></span><span> </span>
+              <h6 class="pt-3 mb-0"><?php echo $facilitatorDBName ?></h6>
+              <span class="text-black-50 pt-2"><?php echo $facilitatorDBEmail ?></span><span> </span>
             </div>
           </div>
           <div class="col-lg-8 col-md-12 col-sm-12 mb-0">
             <?php
-            if (isset($_POST["editTeacher"])) {
+            if (isset($_POST["editFacilitator"])) {
 
-              //Array - Teacher Name
-              if (empty($_POST["editTeacherName"])) {
+              //Array - Facilitator Name
+              if (empty($_POST["editFacilitatorName"])) {
                 authErrorMsg("Please fill up all the required fields.");
               } else {
-                $editTeacherName = filterInput($_POST["editTeacherName"]);
-                $teacherNewDetails["teacherName"] = $_POST["editTeacherName"];
+                $editFacilitatorName = filterInput($_POST["editFacilitatorName"]);
+                $facilitatorNewDetails["facilitatorName"] = $_POST["editFacilitatorName"];
               }
 
-              //Array - Teacher Email
-              if (empty($_POST["editTeacherEmail"])) {
+              //Array - Facilitator Email
+              if (empty($_POST["editFacilitatorEmail"])) {
                 authErrorMsg("Please fill up all the required fields.");
               } else {
-                $editTeacherEmail = filterInput($_POST["editTeacherEmail"]);
-                if (!isValidEmail($editTeacherEmail)) {
+                $editFacilitatorEmail = filterInput($_POST["editFacilitatorEmail"]);
+                if (!isValidEmail($editFacilitatorEmail)) {
                   authErrorMsg("Please input a valid email address.");
                 } else {
-                  $teacherNewDetails["teacherEmail"] = $_POST["editTeacherEmail"];
+                  $facilitatorNewDetails["facilitatorEmail"] = $_POST["editFacilitatorEmail"];
                 }
               }
 
-              //Array - Teacher Phone
-              if (!empty($_POST["editTeacherPhone"])) {
-                $editTeacherPhone = filterInput($_POST["editTeacherPhone"]);
-                $teacherNewDetails["teacherPhone"] = $_POST["editTeacherPhone"];
+              //Array - Facilitator Phone
+              if (!empty($_POST["editFacilitatorPhone"])) {
+                $editFacilitatorPhone = filterInput($_POST["editFacilitatorPhone"]);
+                $facilitatorNewDetails["facilitatorPhone"] = $_POST["editFacilitatorPhone"];
               }
 
-              //Array - Teacher Department
-              if (!empty($_POST["editTeacherDepartment"])) {
-                $teacherNewDetails["teacherDepartment"] = $_POST["editTeacherDepartment"];
+              //Array - Facilitator Designation
+              if (!empty($_POST["editFacilitatorDesignation"])) {
+                $facilitatorNewDetails["facilitatorDesignation"] = $_POST["editFacilitatorDesignation"];
               }
 
-              //Array - Teacher Designation
-              if (!empty($_POST["editTeacherDesignation"])) {
-                $teacherNewDetails["teacherDesignation"] = $_POST["editTeacherDesignation"];
-              }
-
-              //Array - Teacher Gender
-              if (!empty($_POST["editTeacherGender"])) {
-                $teacherNewDetails["teacherGender"] = $_POST["editTeacherGender"];
+              //Array - Facilitator Gender
+              if (!empty($_POST["editFacilitatorGender"])) {
+                $facilitatorNewDetails["facilitatorGender"] = $_POST["editFacilitatorGender"];
               }
 
               $shouldUnlinkOldImage = false;
 
-              //Array - Teacher Picture
-              if (isset($_FILES['editTeacherProfileImage']) && $_FILES['editTeacherProfileImage']['error'] === UPLOAD_ERR_OK) {
-                $editTeacherProfilePicture = uploadFile("assets/images/profile/", "editTeacherProfileImage");
-                $teacherNewDetails["teacherProfileImage"] = $editTeacherProfilePicture['file'];
+              //Array - Facilitator Picture
+              if (isset($_FILES['editFacilitatorProfileImage']) && $_FILES['editFacilitatorProfileImage']['error'] === UPLOAD_ERR_OK) {
+                $editFacilitatorProfilePicture = uploadFile("assets/images/profile/", "editFacilitatorProfileImage");
+                $facilitatorNewDetails["facilitatorProfileImage"] = $editFacilitatorProfilePicture['file'];
 
                 // Check if an old image exists, and if it's not empty
-                if (!empty($teacherDBPicture)) {
+                if (!empty($facilitatorDBPicture)) {
                   $shouldUnlinkOldImage = true;
                 }
               }
 
-              //Array - Teacher Password
-              if (!empty($_POST["editTeacherPassword"]) || !empty($_POST["editTeacherPhone"])) {
-                $editTeacherPassword = filterInput($_POST["editTeacherPassword"]);
-                if (!isValidPassword($editTeacherPassword)) {
+              //Array - Facilitator Password
+              if (!empty($_POST["editFacilitatorPassword"]) || !empty($_POST["editFacilitatorPhone"])) {
+                $editFacilitatorPassword = filterInput($_POST["editFacilitatorPassword"]);
+                if (!isValidPassword($editFacilitatorPassword)) {
                   authErrorMsg("Password requirements not met. Please input 8 characters with 1 uppercase, 1 number and 1 special char.");
                 } else {
-                  $teacherNewDetails["teacherPassword"] = password_hash($_POST["editTeacherPassword"], PASSWORD_DEFAULT);
+                  $facilitatorNewDetails["facilitatorPassword"] = password_hash($_POST["editFacilitatorPassword"], PASSWORD_DEFAULT);
                   DB::startTransaction();
                   DB::update(
-                    'teacher',
-                    $teacherNewDetails,
-                    "teacherID=%i",
-                    $teacherDBID
+                    'facilitator',
+                    $facilitatorNewDetails,
+                    "facilitatorID=%i",
+                    $facilitatorDBID
                   );
 
                   //Upon successful submission
@@ -124,11 +119,11 @@ $teacherNewDetails = array(
                     DB::commit();
 
                     // Unlink the old image here after successful DB update
-                    if ($shouldUnlinkOldImage && !empty($teacherDBPicture)) {
-                      unlink("assets/images/profile/" . $teacherDBPicture);
+                    if ($shouldUnlinkOldImage && !empty($facilitatorDBPicture)) {
+                      unlink("assets/images/profile/" . $facilitatorDBPicture);
                     }
 
-                    sweetAlertTimerRedirect('Update Profile', 'Teacher profile successfully updated!', 'success', (SITE_URL . 'admin'));
+                    sweetAlertTimerRedirect('Update Profile', 'Facilitator profile successfully updated!', 'success', (SITE_URL . 'admin'));
                   } else {
                     DB::rollback();
                     sweetAlertTimerRedirect('Update Profile', 'Something went wrong, please try again', 'error', (SITE_URL . 'admin'));
@@ -137,10 +132,10 @@ $teacherNewDetails = array(
               } else {
                 DB::startTransaction();
                 DB::update(
-                  'teacher',
-                  $teacherNewDetails,
-                  "teacherID=%i",
-                  $teacherDBID
+                  'facilitator',
+                  $facilitatorNewDetails,
+                  "facilitatorID=%i",
+                  $facilitatorDBID
                 );
 
                 //Upon successful submission
@@ -149,11 +144,11 @@ $teacherNewDetails = array(
                   DB::commit();
 
                   // Unlink the old image here after successful DB update
-                  if ($shouldUnlinkOldImage && !empty($teacherDBPicture)) {
-                    unlink("assets/images/profile/" . $teacherDBPicture);
+                  if ($shouldUnlinkOldImage && !empty($facilitatorDBPicture)) {
+                    unlink("assets/images/profile/" . $facilitatorDBPicture);
                   }
                   
-                  sweetAlertTimerRedirect('Update Profile', 'Teacher profile successfully updated!', 'success', (SITE_URL . 'admin'));
+                  sweetAlertTimerRedirect('Update Profile', 'Facilitator profile successfully updated!', 'success', (SITE_URL . 'admin'));
                 } else {
                   DB::rollback();
                   sweetAlertTimerRedirect('Update Profile', 'No changes recorded!', 'success', (SITE_URL . 'admin'));
@@ -171,65 +166,50 @@ $teacherNewDetails = array(
               <!---------Form ---------->
               <form method="POST" enctype="multipart/form-data">
                 <div class="row mt-3">
-                  <div class="col-lg-12 col-md-12 col-sm-12 mt-10"><label class="labels">Name*</label><input type="text" name="editTeacherName" class="form-control" placeholder="first name" value="<?php echo $teacherDBName ?>"></div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 mt-10"><label class="labels">Name*</label><input type="text" name="editFacilitatorName" class="form-control" placeholder="first name" value="<?php echo $facilitatorDBName ?>"></div>
 
-                  <div class="col-lg-12 col-md-12 col-sm-12 mt-30"><label class="labels">Password* (Leave it blank to not change password)</label> <input type="password" name="editTeacherPassword" class="form-control" value=""></div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 mt-30"><label class="labels">Password* (Leave it blank to not change password)</label> <input type="password" name="editFacilitatorPassword" class="form-control" value=""></div>
 
-                  <div class="col-lg-12 col-md-12 col-sm-12 mt-30"><label class="labels">Email*</label><input type="email" name="editTeacherEmail" class="form-control" placeholder="Enter email" value="<?php echo $teacherDBEmail ?>"></div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 mt-30"><label class="labels">Email*</label><input type="email" name="editFacilitatorEmail" class="form-control" placeholder="Enter email" value="<?php echo $facilitatorDBEmail ?>"></div>
 
-                  <div class="col-lg-12 col-md-12 col-sm-12 mt-30"><label class="labels">Profile Picture</label><input type="file" name="editTeacherProfileImage" id="editTeacherProfileImage" class="form-control"></div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 mt-30"><label class="labels">Profile Picture</label><input type="file" name="editFacilitatorProfileImage" id="editFacilitatorProfileImage" class="form-control"></div>
 
                   <div id="preview" class="col-lg-12 col-md-12 col-sm-12 text-center">
                     <div class="preview-border preview-profile"></div>
                   </div>
 
-                  <div class="col-lg-6 col-md-12 col-sm-12 mt-30"><label class="labels">Department</label>
-                    <br>
-                    <select class="form-select form-select-option" name="editTeacherDepartment" aria-label="Default select example">
-                      <option disabled>Select options below: </option>
-                      <option <?php if ($teacherDBDepartment == 1) {
-                                echo 'selected';
-                              } ?> value="1">English</option>
-                      <option <?php if ($teacherDBDepartment == 2) {
-                                echo 'selected';
-                              } ?> value="2">Mathematics</option>
-                      <option <?php if ($teacherDBDepartment == 3) {
-                                echo 'selected';
-                              } ?> value="3">Science</option>
-                    </select>
-                  </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 mt-30"><label class="labels">Designation</label>
-                    <br><select class="form-select form-select-option" name="editTeacherDesignation" aria-label="Default select example">
+                    <br><select class="form-select form-select-option" name="editFacilitatorDesignation" aria-label="Default select example">
                       <option disabled>Select options below: </option>
-                      <option <?php if ($teacherDBDesignation == 1) {
+                      <option <?php if ($facilitatorDBDesignation == 1) {
                                 echo 'selected';
-                              } ?> value="1">Teacher</option>
-                      <option <?php if ($teacherDBDesignation == 2) {
+                              } ?> value="1">Facilitator</option>
+                      <option <?php if ($facilitatorDBDesignation == 2) {
                                 echo 'selected';
                               } ?> value="2">Head of Department</option>
                     </select>
                   </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 mt-30"><label class="labels">Gender</label>
-                    <br><select class="form-select form-select-option" name="editTeacherGender" aria-label="Default select example">
+                    <br><select class="form-select form-select-option" name="editFacilitatorGender" aria-label="Default select example">
                       <option disabled>Select options below: </option>
-                      <option <?php if ($teacherDBGender == 1) {
+                      <option <?php if ($facilitatorDBGender == 1) {
                                 echo 'selected';
                               } ?> value="1">Male</option>
-                      <option <?php if ($teacherDBGender == 2) {
+                      <option <?php if ($facilitatorDBGender == 2) {
                                 echo 'selected';
                               } ?> value="2">Female</option>
-                      <option <?php if ($teacherDBGender == 3) {
+                      <option <?php if ($facilitatorDBGender == 3) {
                                 echo 'selected';
                               } ?> value="3">Rather not say</option>
                     </select>
                   </div>
-                  <div class="col-lg-6 col-md-12 col-sm-12 mt-30"><label class="labels">Phone</label><input type="tel" name="editTeacherPhone" class="form-control" placeholder="Enter phone number" value="<?php echo $teacherDBPhone ?>"></div>
+                  <div class="col-lg-6 col-md-12 col-sm-12 mt-30"><label class="labels">Phone</label><input type="tel" name="editFacilitatorPhone" class="form-control" placeholder="Enter phone number" value="<?php echo $facilitatorDBPhone ?>"></div>
                 </div>
 
                 <!--------- Actionables ---------->
                 <div class="d-flex align-items-center justify-content-end mt-40">
                   <a href='<?php echo SITE_URL . "admin" ?>' class="btn-tertiary link-grey">Cancel</a>
-                  <button class="btn btn-primary profile-button ml-50" name="editTeacher" type="submit">Update Profile</button>
+                  <button class="btn btn-primary profile-button ml-50" name="editFacilitator" type="submit">Update Profile</button>
                 </div>
               </form>
             </div>
@@ -249,7 +229,7 @@ $teacherNewDetails = array(
     // Upload Image Preview
     $('.preview-profile').hide();
 
-    $("#editTeacherProfileImage").change(function() {
+    $("#editFacilitatorProfileImage").change(function() {
       if (this.files && this.files[0]) {
         var fileReader = new FileReader();
         fileReader.onload = function(event) {
