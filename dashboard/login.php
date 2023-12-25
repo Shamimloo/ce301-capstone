@@ -42,6 +42,7 @@ if (isset($_SESSION['cookie'])) {
             <form class="mt-1 pt-2" method="POST">
 
               <?php
+              // Trigger upon submission of form using button name = login
               // ISSET post with validation
               if (isset($_POST['login'])) {
                 $email = filterInput($_POST['email']);
