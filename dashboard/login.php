@@ -4,12 +4,14 @@ $pageName = "Login";
 //Include Header
 include 'assets/templates/dashboard/header.php';
 
-//If teacher is logged in then redirect to dashboard straight
-// if (isset($_SESSION['cookie'])) {
-//   if (isTeacherLoggedIn()) {
-//     jsRedirect(SITE_ROOT . "?site=admin");
-//   }
-// }
+// If facilitator is logged in then redirect to dashboard straight
+// If not redirect out to login page
+// Testing the issue key
+if (isset($_SESSION['cookie'])) {
+  if (isFacilitatorLoggedIn()) {
+    jsRedirect(SITE_ROOT . "?site=admin");
+  }
+}
 
 ?>
 
