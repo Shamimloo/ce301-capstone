@@ -75,11 +75,6 @@ $facilitatorNewDetails = array(
                 $facilitatorNewDetails["facilitatorPhone"] = $_POST["editFacilitatorPhone"];
               }
 
-              //Array - Facilitator Department
-              if (!empty($_POST["editFacilitatorDepartment"])) {
-                $facilitatorNewDetails["facilitatorDepartment"] = $_POST["editFacilitatorDepartment"];
-              }
-
               //Array - Facilitator Designation
               if (!empty($_POST["editFacilitatorDesignation"])) {
                 $facilitatorNewDetails["facilitatorDesignation"] = $_POST["editFacilitatorDesignation"];
@@ -183,21 +178,6 @@ $facilitatorNewDetails = array(
                     <div class="preview-border preview-profile"></div>
                   </div>
 
-                  <div class="col-lg-6 col-md-12 col-sm-12 mt-30"><label class="labels">Department</label>
-                    <br>
-                    <select class="form-select form-select-option" name="editFacilitatorDepartment" aria-label="Default select example">
-                      <option disabled>Select options below: </option>
-                      <option <?php if ($facilitatorDBDepartment == 1) {
-                                echo 'selected';
-                              } ?> value="1">English</option>
-                      <option <?php if ($facilitatorDBDepartment == 2) {
-                                echo 'selected';
-                              } ?> value="2">Mathematics</option>
-                      <option <?php if ($facilitatorDBDepartment == 3) {
-                                echo 'selected';
-                              } ?> value="3">Science</option>
-                    </select>
-                  </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 mt-30"><label class="labels">Designation</label>
                     <br><select class="form-select form-select-option" name="editFacilitatorDesignation" aria-label="Default select example">
                       <option disabled>Select options below: </option>
