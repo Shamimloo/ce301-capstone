@@ -703,7 +703,7 @@ $addCorrectAnswerTitle = $addWrongAnswerTitle = $addCorrectAnswerDescription = $
                   <div class="d-flex justify-content-between" style="flex-flow: row wrap;">
                     <div class="image-container">
                       <div class="col-lg-12 col-md-12 col-sm-12">
-                        <label class="labels">Correct Answer Title</label>
+                        <label class="labels">Correct Answer Title *</label>
                         <input type="text" class="form-control must-fill mb-20" name="addCorrectAnswerTitle" id="addCorrectAnswerTitle" placeholder="Correct Answer" value="<?php echo $addCorrectAnswerTitle; ?>">
                       </div>
                       <div>
@@ -720,7 +720,7 @@ $addCorrectAnswerTitle = $addWrongAnswerTitle = $addCorrectAnswerDescription = $
                     </div>
                     <div class="image-container">
                       <div class="col-lg-12 col-md-12 col-sm-12">
-                        <label class="labels">Wrong Answer Title</label>
+                        <label class="labels">Wrong Answer Title *</label>
                         <input type="text" class="form-control must-fill mb-20" name="addWrongAnswerTitle" id="addWrongAnswerTitle" placeholder="Wrong Answer " value="<?php echo $addWrongAnswerTitle; ?>">
                       </div>
                       <div class="col-lg-12 col-md-12 col-sm-12">
