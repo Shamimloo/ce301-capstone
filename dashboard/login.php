@@ -6,6 +6,7 @@ include 'assets/templates/dashboard/header.php';
 
 // If facilitator is logged in then redirect to dashboard straight
 // If not redirect out to login page
+// Testing the issue key
 if (isset($_SESSION['cookie'])) {
   if (isFacilitatorLoggedIn()) {
     jsRedirect(SITE_ROOT . "?site=admin");
