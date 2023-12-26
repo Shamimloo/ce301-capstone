@@ -160,7 +160,7 @@ $facilitatorNewDetails = array(
             <!---------- Main Title ---------->
             <div class="p-3 py-5">
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4 class="text-right">Edit Profile Settings</h4>
+                <h4 class="text-right">Profile Settings</h4>
               </div>
 
               <!---------Form ---------->
