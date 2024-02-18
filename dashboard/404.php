@@ -13,7 +13,7 @@ include 'assets/templates/dashboard/404/header.php';
           <div class="content-detail">
             <h1 class="global-title"><span>4</span><span>0</span><span>4</span></h1>
 
-            <h4 class="sub-title">Oops!</h4>
+            <h4 class="sub-title">Oops! Haha</h4>
 
             <p class="detail-text">We're sorry,<br> The page you were looking for doesn't exist anymore.</p>
 
