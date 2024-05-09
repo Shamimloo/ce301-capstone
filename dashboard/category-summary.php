@@ -116,7 +116,7 @@ include 'assets/templates/dashboard/auth/header.php';
     <script>
       //Datatable
       $(document).ready(function() {
-        $('#subjectTable').DataTable({
+        $('#categoryTable').DataTable({
           ordering: true,
           responsive: true,
           order: [

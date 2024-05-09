@@ -196,6 +196,11 @@ if (isset($_GET['site'])) {
     case 'learner-delete':
       include 'dashboard/learner-delete.php';
       break;
+
+       //----- Student Group Summary -----
+    case 'learnergroup-summary':
+      include 'dashboard/learnergroup-summary.php';
+      break;
      
       //----- Infopage Summary -----
     case 'infopage-summary':
