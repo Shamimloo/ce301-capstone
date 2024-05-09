@@ -29,7 +29,7 @@ $addCorrectAnswerTitle = $addWrongAnswerTitle = $addCorrectAnswerDescription = $
           <div class="col-lg-12 col-md-12 col-sm-12 box my-5">
             <div class="message"></div>
             <div class="p-3 py-5">
-              <p class='alert alert-danger mb-30'></p>
+              <p class='alert alert-danger hide mb-30'></p>
               <?php
               if (isset($_POST["addQuestion"])) {
 
