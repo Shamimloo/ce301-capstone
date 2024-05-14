@@ -114,21 +114,17 @@ include 'assets/templates/dashboard/auth/header.php';
   <script type="text/javascript">
     //Datatable 
     $(document).ready(function() {
-      $('#studentLevelTable').DataTable({
+      $('#facilitatorTable').DataTable({
         responsive: true,
         //Define column widths
         columnDefs: [{
           "width": "20%",
-          "targets": [1, 2, 5, 0],
+          "targets": [1, 2, 3, 4, 0],
           "orderable": false,
-          // "targets": [5]
           "targets": 'no-sort'
-        }, {
-          "width": "10%",
-          "targets": [3, 4]
         }],
         order: [
-          [4, 'asc']
+          [3, 'asc']
         ]
       });
     });
