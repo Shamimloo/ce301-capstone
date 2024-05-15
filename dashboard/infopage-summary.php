@@ -64,7 +64,7 @@ include 'assets/templates/dashboard/auth/header.php';
                   <th class="border-bottom-0 text-center">Date Updated</th>
                   <th class="border-bottom-0 text-center">Status</th>
                   <th class="border-bottom-0 text-center">Actions</th>
-                  <!-- <th class="border-bottom-0 text-center">Select</th> -->
+                  <th class="border-bottom-0 text-center">Select</th>
                 </tr>
               </thead>
               <tbody id="result">

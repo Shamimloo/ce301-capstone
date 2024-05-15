@@ -14,7 +14,7 @@ if (!isFacilitatorLoggedIn()) {
 if (isset($_GET["groupID"])) {
   $getGroupID = $_GET["groupID"];
   DB::startTransaction();
-  DB::update('group', [
+  DB::update('learnerGroup', [
     'groupStatus' => 0,
   ], "groupID=%i", $getGroupID);
 }

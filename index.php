@@ -197,11 +197,36 @@ if (isset($_GET['site'])) {
       include 'dashboard/learner-delete.php';
       break;
 
-       //----- Student Group Summary -----
+      //----- Student Group Summary -----
     case 'learnergroup-summary':
       include 'dashboard/learnergroup-summary.php';
       break;
-     
+
+      //----- Student Group Activate -----
+    case 'learnergroup-activate':
+      include 'dashboard/learnergroup-activate.php';
+      break;
+
+      //----- Student Group Deactivate -----
+    case 'learnergroup-deactivate':
+      include 'dashboard/learnergroup-deactivate.php';
+      break;
+
+      //----- Student Group Add -----
+    case 'learnergroup-add':
+      include 'dashboard/learnergroup-add.php';
+      break;
+
+      //----- Student Group Edit -----
+    case 'learnergroup-edit':
+      include 'dashboard/learnergroup-edit.php';
+      break;
+
+      //----- Student Group Delete -----
+    case 'learnergroup-delete':
+      include 'dashboard/learnergroup-delete.php';
+      break;
+
       //----- Infopage Summary -----
     case 'infopage-summary':
       include 'dashboard/infopage-summary.php';

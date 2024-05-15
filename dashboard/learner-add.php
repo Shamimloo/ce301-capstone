@@ -6,8 +6,7 @@ include 'assets/templates/dashboard/header.php';
 include 'assets/templates/dashboard/auth/header.php';
 
 // Initialize variables for loading
-$addLearnerName = $addLearnerStatus = $addClassID = $addHouseID = $addLearnerIndex = '';
-
+$addLearnerName = $addLearnerStatus = $addLearnerIndex = $addLearnerGroup = $addGroupID = '';
 ?>
 
 <body class="sidebar-expand">
@@ -124,41 +123,41 @@ $addLearnerName = $addLearnerStatus = $addClassID = $addHouseID = $addLearnerInd
             ?>
             <div class="p-3 py-5">
               <!-- Main Title -->
-              <!-- <div>
+              <div>
                 <h4 class="text-right">Import File</h4>
                 <p>Download the template <a href="https://drive.google.com/uc?export=download&id=1M2X2O8tBvLssayLaxpvEgtDKEon0mwfy" class="btn-tertiary" download>here</a>. <br />Please fill in the <b>Index Numbers</b>, <b>Status</b>, <b>Name</b>, and <b>House ID</b> according to the ID column in the <a style="color:#eabe03;" href="<?php echo SITE_URL . "learnerhouse-summary" ?>" target="_blank">Learner House</a> page. Ensure that there are <b>no duplicate index numbers</b> in the group and <b>all fields are required</b>.</p>
-              </div> -->
+              </div>
 
               <!-- Upload File Form -->
-              <!-- <form method="post" enctype="multipart/form-data">
+              <form method="post" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-lg-6 col-md-12 col-sm-12 mt-20">
                     <input type="file" name="importLearnerList" id="uploadLearnerList" class="form-control" accept=".csv,.xls,.xlsx" value="<?php echo $uploadFile ?>">
                   </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 mt-20">
-                    <select class="form-select form-select-option" name="addClassID" id="addClassID" onchange="getClass(this.value);">
-                      <option selected="true" disabled="disabled">Select Group</option> -->
+                    <select class="form-select form-select-option" name="addGroupID" id="addGroupID" onchange="getClass(this.value);">
+                      <option selected="true" disabled="disabled">Select Group</option>
               <?php
-              // $queryDBClass = DB::query("SELECT * FROM `group`");
-              // // Populate all the possible groups
-              // foreach ($queryDBClass as $queryDBClassResults) {
-              //   $queryDBClassID = $queryDBClassResults["groupID"];
-              //   $queryDBClassName = $queryDBClassResults["groupName"];
+              $queryDBClass = DB::query("SELECT * FROM `learnerGroup`");
+              // Populate all the possible groups
+              foreach ($queryDBGroup as $queryDBGroupResults) {
+                $queryDBGroupID = $queryDBGroupResults["groupID"];
+                $queryDBGroupName = $queryDBGroupResults["groupName"];
               ?>
-              <option value="<?php echo $queryDBClassID; ?>" <?php if ($queryDBClassID == $addClassID) {
+              <option value="<?php echo $queryDBGroupID; ?>" <?php if ($queryDBGroupID == $addGroupID) {
                                                                 echo 'selected';
-                                                              } ?>><?php echo $queryDBClassName; ?></option>
+                                                              } ?>><?php echo $queryDBGroupName; ?></option>
               <?php
-              // }
+              }
               ?>
               </select>
             </div>
             <!-- Actionables -->
-            <!-- <div class="d-flex justify-content-end align-items-center mt-30">
+            <div class="d-flex justify-content-end align-items-center mt-30">
                     <button class="btn btn-primary profile-button" name="importFile" type="submit">Upload</button>
                   </div>
-                </div> -->
-            <!-- </form> -->
+                </div>
+            </form>
 
             <div class="d-flex justify-content-between align-items-center mt-30 mb-20">
               <div class="line w-45 mt-50 mb-20"></div>
