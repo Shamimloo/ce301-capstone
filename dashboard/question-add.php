@@ -301,10 +301,10 @@ $addCorrectAnswerTitle = $addWrongAnswerTitle = $addCorrectAnswerDescription = $
                       $success = DB::affectedRows();
                       if ($success) {
                         DB::commit();
-                        sweetAlertTimerRedirect('Add Question', 'Question successfully added!', 'success', (SITE_URL . "question-summary"));
+                        sweetAlertTimerRedirect('Add Multi-Answers Text Question', 'Question successfully added!', 'success', (SITE_URL . "question-summary"));
                       } else {
                         DB::rollback();
-                        sweetAlertTimerRedirect('Add Question', 'An error occured. Please try again later.', 'error', (SITE_URL . "question-add"));
+                        sweetAlertTimerRedirect('Add Multi-Answers Text Question', 'An error occured. Please try again later.', 'error', (SITE_URL . "question-add"));
                       }
                     } else {
                       authErrorMsg("Please fill up all required fields.");
