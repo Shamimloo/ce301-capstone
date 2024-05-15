@@ -99,7 +99,7 @@ $facilitatorNewDetails = array(
               }
 
               //Array - Facilitator Password
-              if (!empty($_POST["editFacilitatorPassword"]) || !empty($_POST["editFacilitatorPhone"])) {
+              if (!empty($_POST["editFacilitatorPassword"])) {
                 $editFacilitatorPassword = filterInput($_POST["editFacilitatorPassword"]);
                 if (!isValidPassword($editFacilitatorPassword)) {
                   authErrorMsg("Password requirements not met. Please input 8 characters with 1 uppercase, 1 number and 1 special char.");
