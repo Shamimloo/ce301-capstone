@@ -31,12 +31,12 @@
                 </li>
 
                 <!---------- Reports ---------->
-                <!-- <li>
+                <li>
                   <a href="<?php echo SITE_URL; ?>report-summary">
                     <i class="fa-regular fa-clipboard"></i>
                     <span>Reports</span>
                   </a>
-                </li> -->
+                </li>
 
                 <!---------- Teacher Level ---------->
                 <li class="sidebar-submenu" id="teacher-level">

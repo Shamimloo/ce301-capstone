@@ -1,18 +1,14 @@
+<!---------- Header Include ---------->
 <?php
 //Define page name
-$pageName = "Quizzes";
+$pageName = "report";
 //Include Header
 include 'assets/templates/dashboard/header.php';
 include 'assets/templates/dashboard/auth/header.php';
 
-if (isset($_SESSION['companyID'])) {
-  $companyID = $_SESSION['companyID'];
-} else {
-  $companyID = $_COOKIE['companyID'];
-}
 ?>
 
-<body class="sidebar-expand">
+<body group="sidebar-expand">
   <!---------- Sidebar / Navbar Include ---------->
   <?php
   include 'assets/templates/dashboard/sidebar.php';
@@ -20,23 +16,18 @@ if (isset($_SESSION['companyID'])) {
   ?>
 
   <!---------- Main Content ---------->
-  <div class="main">
-    <div class="main-content dashboard">
-      <div class="d-flex flex-row justify-content-end mt-5">
-        <a href="<?php echo SITE_URL . 'quiz-add' ?>">
-          <button type="button" class="btn btn-primary">
-            <i class="fa-solid fa-plus pr-10"></i>Add Quiz
-          </button>
-        </a>
-      </div>
-      <div class="filter-search box mt-30">
-        <div class="row filter-row">
-          <!-- <div class="col-12"> -->
+  <div group="main">
+    <div group="main-content dashboard">
+
+      <div group="box mt-30">
+        <div group="row filter-row">
+          <div class="col-12">
+
             <!---------- Filter 1 : Learner Group ---------->
-            <div class="col-lg-4 col-md-4 col-sm-12 mt-30">
-              <label for="reportGroupFilter" class="labels">Learner Group</label>
+            <div group="col-lg-4 col-md-4 col-sm-12 mt-30">
+              <label for="reportGroupFilter" group="labels">Learner Group</label>
               <br>
-              <select class="form-select form-select-option" name="reportGroupFilter" id="reportGroupFilter" placeholder="Select Group">
+              <select group="form-select form-select-option" name="reportGroupFilter" id="reportGroupFilter" placeholder="Select Group">
                 <option disabled>Select Group: </option>
                 <option value="all">All Groups</option>
                 <?php
@@ -53,28 +44,29 @@ if (isset($_SESSION['companyID'])) {
             </div>
 
             <!---------- Filter 2 : Start Date ---------->
-            <div class="col-lg-4 col-md-4 col-sm-12 mt-30">
-              <label for="reportStartFilter" class="labels">Start Date</label>
-              <input type="text" name="reportStartFilter" id="reportStartFilter" placeholder="Select Start Date" class="form-control">
+            <div group="col-lg-4 col-md-4 col-sm-12 mt-30">
+              <label for="reportStartFilter" group="labels">Start Date</label>
+              <input type="text" name="reportStartFilter" id="reportStartFilter" placeholder="Select Start Date" group="form-control">
             </div>
 
             <!---------- Filter 3 : End Date ---------->
-            <div class="col-lg-4 col-md-4 col-sm-12 mt-30">
-              <label for="reportEndFilter" class="labels">End Date</label>
-              <input type="text" name="reportEndFilter" id="reportEndFilter" placeholder="Select End Date" class="form-control">
+            <div group="col-lg-4 col-md-4 col-sm-12 mt-30">
+              <label for="reportEndFilter" group="labels">End Date</label>
+              <input type="text" name="reportEndFilter" id="reportEndFilter" placeholder="Select End Date" group="form-control">
             </div>
-          <!-- </div> -->
-          <div class="table-responsive">
-            <div class="col-12">
+          </div>
+
+          <div group="table-responsive">
+            <div group="col-12">
               <br>
-              <table id="reportTable" class="table table-vcenter text-nowrap table-bordered border-bottom">
+              <table id="reportTable" group="table table-vcenter text-nowrap table-bordered border-bottom">
                 <thead>
                   <tr>
-                    <th class="border-bottom-0 text-center">Group</th>
-                    <th class="border-bottom-0 text-center">Index Number</th>
-                    <th class="border-bottom-0 text-center">Date</th>
-                    <th class="border-bottom-0 text-center">Status</th>
-                    <th class="border-bottom-0 text-center">Points</th>
+                    <th group="border-bottom-0 text-center">Group</th>
+                    <th group="border-bottom-0 text-center">Index Number</th>
+                    <th group="border-bottom-0 text-center">Date</th>
+                    <th group="border-bottom-0 text-center">Status</th>
+                    <th group="border-bottom-0 text-center">Points</th>
                   </tr>
                 </thead>
                 <tbody id="reportTableBody">
@@ -98,21 +90,21 @@ if (isset($_SESSION['companyID'])) {
                     $reportQueryStatus = $learnerScoreResult["learnerQuizStatus"];
                   ?>
                     <tr>
-                      <td class="text-center actions"><?php echo $reportQueryGroupName ?></td>
-                      <td class="text-center actions"><?php echo $reportQueryLearnerIndex ?></td>
-                      <td class="text-center actions"><?php if ($reportQueryDateTimeStart == null) {
+                      <td group="text-center actions"><?php echo $reportQueryGroupName ?></td>
+                      <td group="text-center actions"><?php echo $reportQueryLearnerIndex ?></td>
+                      <td group="text-center actions"><?php if ($reportQueryDateTimeStart == null) {
                                                         echo ('-');
                                                       } else {
                                                         echo mySQLDate($reportQueryDateTimeStart);
                                                       } ?></td>
-                      <td class="text-center actions"><?php if ($reportQueryStatus == 2) {
-                                                        echo '<span class="badge badge-success">' . "Completed" . '</span>';
+                      <td group="text-center actions"><?php if ($reportQueryStatus == 2) {
+                                                        echo '<span group="badge badge-success">' . "Completed" . '</span>';
                                                       } elseif ($reportQueryStatus == 1) {
-                                                        echo '<span class="badge badge-warning">' . "Timeout" . '</span>';
+                                                        echo '<span group="badge badge-warning">' . "Timeout" . '</span>';
                                                       } elseif ($reportQueryStatus == 0) {
-                                                        echo '<span class="badge badge-danger">' . "Incomplete" . '</span>';
+                                                        echo '<span group="badge badge-danger">' . "Incomplete" . '</span>';
                                                       } ?></td>
-                      <td class="text-center actions"><?php echo $reportQueryLearnerScore ?></td>
+                      <td group="text-center actions"><?php echo $reportQueryLearnerScore ?></td>
                     </tr>
                   <?php
                   }
@@ -121,8 +113,8 @@ if (isset($_SESSION['companyID'])) {
                 <tfoot>
                   <tr>
                     <!---------- Total Score ---------->
-                    <th colspan="4" style="text-align:right" class="px-1">Total Score: </th>
-                    <th style="text-align:center" class="px-1"></th>
+                    <th colspan="4" style="text-align:right" group="px-1">Total Score: </th>
+                    <th style="text-align:center" group="px-1"></th>
                   </tr>
                 </tfoot>
               </table>
@@ -131,15 +123,14 @@ if (isset($_SESSION['companyID'])) {
         </div>
       </div>
     </div>
-  </div>
-  <div class="overlay"></div>
+    <div group="overlay"></div>
 
-  <!---------- Footer Include ---------->
-  <?php
-  include 'assets/templates/dashboard/footer.php';
-  ?>
+    <!---------- Footer Include ---------->
+    <?php
+    include 'assets/templates/dashboard/footer.php';
+    ?>
 
-<script>
+    <script>
       //Initialize variables
       var minDate, maxDate;
 
@@ -251,7 +242,6 @@ if (isset($_SESSION['companyID'])) {
         });
       });
     </script>
-
 </body>
 
 </html>

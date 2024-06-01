@@ -187,6 +187,9 @@ $addCorrectAnswerTitle = $addWrongAnswerTitle = $addCorrectAnswerDescription = $
                       'questionWrongAnswerImage' => $addWrongAnswerImage['file'],
                       'questionWrongAnswerDescription' => $addWrongAnswerDescription,
 
+                      'questionDateCreated'=> date('Y-m-d H:i:s'),
+                      'questionDateUpdated'=> date('Y-m-d H:i:s'),
+
                       'categoryID' => $addCategoryID
                     ]);
 
@@ -278,8 +281,13 @@ $addCorrectAnswerTitle = $addWrongAnswerTitle = $addCorrectAnswerDescription = $
                         'questionWrongAnswerImage' => $addWrongAnswerImage['file'],
                         'questionWrongAnswerDescription' => $addWrongAnswerDescription,
 
+                        'questionDateCreated'=> date('Y-m-d H:i:s'),
+                        'questionDateUpdated'=> date('Y-m-d H:i:s'),
+
                         'categoryID' => $addCategoryID
                       ]);
+
+                      $lastQuestionID = DB::insertId();
 
                       for ($i = 0; $i < 4; $i++) { //Insert data for Option
                         if (isset($_POST["multiAnswerCorrectOption"][$i])) {
@@ -351,6 +359,9 @@ $addCorrectAnswerTitle = $addWrongAnswerTitle = $addCorrectAnswerDescription = $
                       'questionWrongAnswerImage' => $addWrongAnswerImage['file'],
                       'questionWrongAnswerDescription' => $addWrongAnswerDescription,
 
+                      'questionDateCreated'=> date('Y-m-d H:i:s'),
+                      'questionDateUpdated'=> date('Y-m-d H:i:s'),
+
                       'categoryID' => $addCategoryID
                     ]);
 
@@ -421,6 +432,9 @@ $addCorrectAnswerTitle = $addWrongAnswerTitle = $addCorrectAnswerDescription = $
                       'questionWrongAnswerTitle' => $addWrongAnswerTitle,
                       'questionWrongAnswerImage' => $addWrongAnswerImage['file'],
                       'questionWrongAnswerDescription' => $addWrongAnswerDescription,
+
+                      'questionDateCreated'=> date('Y-m-d H:i:s'),
+                      'questionDateUpdated'=> date('Y-m-d H:i:s'),
 
                       'categoryID' => $addCategoryID
                     ]);

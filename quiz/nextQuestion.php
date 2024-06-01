@@ -11,10 +11,10 @@ if (isset($_POST["query"])) {
 
   //State - Times up
   if ($_POST["query"] == 9) {
-    DB::update('studentQuiz', [
-      'studentQuizStatus' => 1,
-      'studentQuizDateTimeEnded' => date('Y-m-d H:i:s'),
-    ], "studentQuizID=%i", $_SESSION["studentQuizID"]);
+    DB::update('learnerQuiz', [
+      'learnerQuizStatus' => 1,
+      'learnerQuizDateTimeEnded' => date('Y-m-d H:i:s'),
+    ], "learnerQuizID=%i", $_SESSION["learnerQuizID"]);
   } else {
 
     // Submit button pressed --> Reduce the questions remaining
@@ -50,17 +50,17 @@ if (isset($_POST["query"])) {
       }
 
       // update the score
-      DB::update('studentQuiz', [
-        'studentQuizScore' => $scoreCurrent
-      ], "studentQuizID=%i", $_SESSION["studentQuizID"]);
+      DB::update('learnerQuiz', [
+        'learnerQuizScore' => $scoreCurrent
+      ], "learnerQuizID=%i", $_SESSION["learnerQuizID"]);
     }
 
     //State - Completed quiz
     if ($_SESSION["remainingQns"] == 0) {
-      DB::update('studentQuiz', [
-        'studentQuizStatus' => 2,
-        'studentQuizDateTimeEnded' => date('Y-m-d H:i:s'),
-      ], "studentQuizID=%i", $_SESSION["studentQuizID"]);
+      DB::update('learnerQuiz', [
+        'learnerQuizStatus' => 2,
+        'learnerQuizDateTimeEnded' => date('Y-m-d H:i:s'),
+      ], "learnerQuizID=%i", $_SESSION["learnerQuizID"]);
     } else {
       // Increment the current question
       $_SESSION["currentQn"]++;
