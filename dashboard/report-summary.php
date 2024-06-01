@@ -8,7 +8,7 @@ include 'assets/templates/dashboard/auth/header.php';
 
 ?>
 
-<body class="sidebar-expand">
+<body group="sidebar-expand">
   <!---------- Sidebar / Navbar Include ---------->
   <?php
   include 'assets/templates/dashboard/sidebar.php';
@@ -16,23 +16,24 @@ include 'assets/templates/dashboard/auth/header.php';
   ?>
 
   <!---------- Main Content ---------->
-  <div class="main">
-    <div class="main-content dashboard">
-      <div class="box mt-30">
-        <div class="row filter-row">
-          <!---------- Filter 1 : House ---------->
-          <div class="col-lg-2 col-md-4 col-sm-12 mt-30">
-            <label for="reportHouseFilter" class="labels">House</label>
+  <div group="main">
+    <div group="main-content dashboard">
+      <div group="box mt-30">
+        <div group="row filter-row">
+
+          <!---------- Filter 1 : Learner Group ---------->
+          <div group="col-lg-4 col-md-4 col-sm-12 mt-30">
+            <label for="reportGroupFilter" group="labels">Learner Group</label>
             <br>
-            <select class="form-select form-select-option" name="reportHouseFilter" id="reportHouseFilter" placeholder="Select House">
-              <option disabled>Select House: </option>
-              <option value="all">All Houses</option>
+            <select group="form-select form-select-option" name="reportGroupFilter" id="reportGroupFilter" placeholder="Select Group">
+              <option disabled>Select Group: </option>
+              <option value="all">All Groups</option>
               <?php
-              $reportQueryHouse = DB::query("SELECT * from house WHERE houseStatus=%i", 2);
-              foreach ($reportQueryHouse as $reportQueryHouseResults) {
-                $reportQueryHouseName = $reportQueryHouseResults["houseShortName"];
+              $reportQueryGroup = DB::query("SELECT * from learnerGroup WHERE groupStatus=%i", 2);
+              foreach ($reportQueryGroup as $reportQueryGroupResults) {
+                $reportQueryGroupName = $reportQueryGroupResults["groupShortName"];
               ?>
-                <option value="<?php echo $reportQueryHouseName; ?>"><?php echo $reportQueryHouseName; ?>
+                <option value="<?php echo $reportQueryGroupName; ?>"><?php echo $reportQueryGroupName; ?>
                 </option>
               <?php
               }
@@ -40,117 +41,68 @@ include 'assets/templates/dashboard/auth/header.php';
             </select>
           </div>
 
-          <!---------- Filter 2 : Level ---------->
-          <div class="col-lg-2 col-md-4 col-sm-12 mt-30">
-            <label for="reportLevelFilter" class="labels">Level</label>
-            <br>
-            <select class="form-select form-select-option" name="reportLevelFilter" id="reportLevelFilter" placeholder="Select Level">
-              <option disabled>Select Level: </option>
-              <option value="all">All Levels</option>
-              <?php
-              $reportQueryLevel = DB::query("SELECT * from `level` WHERE levelStatus=%i", 2);
-              foreach ($reportQueryLevel as $reportQueryLevelResults) {
-                $reportQueryLevelName = $reportQueryLevelResults["levelShortName"];
-              ?>
-                <option value="<?php echo $reportQueryLevelName; ?>"><?php echo $reportQueryLevelName; ?>
-                </option>
-              <?php
-              }
-              ?>
-            </select>
+          <!---------- Filter 2 : Start Date ---------->
+          <div group="col-lg-4 col-md-4 col-sm-12 mt-30">
+            <label for="reportStartFilter" group="labels">Start Date</label>
+            <input type="text" name="reportStartFilter" id="reportStartFilter" placeholder="Select Start Date" group="form-control">
           </div>
 
-
-          <!---------- Filter 3 : Class ---------->
-          <div class="col-lg-2 col-md-4 col-sm-12 mt-30">
-            <label for="reportClassFilter" class="labels">Class</label>
-            <br>
-            <select class="form-select form-select-option" name="reportClassFilter" id="reportClassFilter" placeholder="Select Class">
-              <option disabled>Select Class: </option>
-              <option value="all">All Classes</option>
-              <?php
-              $reportQueryClass = DB::query("SELECT * from class WHERE classStatus=%i", 2);
-              foreach ($reportQueryClass as $reportQueryClassResults) {
-                $reportQueryClassName = $reportQueryClassResults["classShortName"];
-              ?>
-                <option value="<?php echo $reportQueryClassName; ?>"><?php echo $reportQueryClassName; ?>
-                </option>
-              <?php
-              }
-              ?>
-            </select>
-          </div>
-
-          <!---------- Filter 4 : Start Date ---------->
-          <div class="col-lg-3 col-md-6 col-sm-12 mt-30">
-            <label for="reportStartFilter" class="labels">Start Date</label>
-            <input type="text" name="reportStartFilter" id="reportStartFilter" placeholder="Select Start Date" class="form-control">
-          </div>
-
-          <!---------- Filter 5 : End Date ---------->
-          <div class="col-lg-3 col-md-6 col-sm-12 mt-30">
-            <label for="reportEndFilter" class="labels">End Date</label>
-            <input type="text" name="reportEndFilter" id="reportEndFilter" placeholder="Select End Date" class="form-control">
+          <!---------- Filter 3 : End Date ---------->
+          <div group="col-lg-4 col-md-4 col-sm-12 mt-30">
+            <label for="reportEndFilter" group="labels">End Date</label>
+            <input type="text" name="reportEndFilter" id="reportEndFilter" placeholder="Select End Date" group="form-control">
           </div>
         </div>
-        <div class="table-responsive">
-          <div class="col-12">
+
+        <div group="table-responsive">
+          <div group="col-12">
             <br>
-            <table id="reportTable" class="table table-vcenter text-nowrap table-bordered border-bottom">
+            <table id="reportTable" group="table table-vcenter text-nowrap table-bordered border-bottom">
               <thead>
                 <tr>
-                  <th class="border-bottom-0 text-center">House</th>
-                  <th class="border-bottom-0 text-center">Level</th>
-                  <th class="border-bottom-0 text-center">Class</th>
-                  <th class="border-bottom-0 text-center">Index Number</th>
-                  <th class="border-bottom-0 text-center">Date</th>
-                  <th class="border-bottom-0 text-center">Status</th>
-                  <th class="border-bottom-0 text-center">Points</th>
+                  <th group="border-bottom-0 text-center">Group</th>
+                  <th group="border-bottom-0 text-center">Index Number</th>
+                  <th group="border-bottom-0 text-center">Date</th>
+                  <th group="border-bottom-0 text-center">Status</th>
+                  <th group="border-bottom-0 text-center">Points</th>
                 </tr>
               </thead>
               <tbody id="reportTableBody">
                 <?php
                 //Query the entire report from database
-                $studentScoreQuery = DB::query("SELECT student.studentID, studentQuiz.studentQuizStatus, student.studentIndex, studentQuiz.studentQuizID, MAX(studentQuiz.studentQuizScore) AS studentQuizScore, DATE(studentQuiz.studentQuizDateTimeEnded) AS quizDateEnded, DATE(studentQuiz.studentQuizDateTimeStarted) AS quizDateStarted, class.classShortName, `level`.levelShortName, house.houseShortName 
-                                FROM studentQuiz 
-                                INNER JOIN student ON studentQuiz.studentID = student.studentID 
-                                INNER JOIN class ON student.classID = class.classID 
-                                INNER JOIN house ON student.houseID = house.houseID 
-                                INNER JOIN `level` ON class.levelID = `level`.levelID 
-                                WHERE house.houseStatus=%i AND class.classStatus=%i 
-                                GROUP BY studentQuiz.studentID, quizDateStarted
+                $learnerScoreQuery = DB::query("SELECT learner.learnerID, learnerQuiz.learnerQuizStatus,learnerQuiz.learnerQuizID, MAX(learnerQuiz.learnerQuizScore) AS learnerQuizScore, DATE(learnerQuiz.learnerQuizDateTimeEnded) AS quizDateEnded, DATE(learnerQuiz.learnerQuizDateTimeStarted) AS quizDateStarted, learnerGroup.groupShortName 
+                                FROM learnerQuiz 
+                                INNER JOIN learner ON learnerQuiz.learnerID = learner.learnerID 
+                                INNER JOIN learnerGroup ON learner.groupID = learnerGroup.groupID 
+                                WHERE learnerGroup.groupStatus=%i 
+                                GROUP BY learnerQuiz.learnerID, quizDateStarted
                                 ORDER BY quizDateStarted DESC
-                                ", 2, 2);
-                foreach ($studentScoreQuery as $studentScoreResult) {
-                  $reportQueryID = $studentScoreResult["studentQuizID"];
-                  $reportQueryStudentIndex = $studentScoreResult['studentIndex'];
-                  $reportQueryStudentScore = $studentScoreResult['studentQuizScore'];
-                  $reportQueryClassName = $studentScoreResult["classShortName"];
-                  $reportQueryHouseShortName = $studentScoreResult["houseShortName"];
-                  $reportQueryDateTimeStart = $studentScoreResult["quizDateStarted"];
-                  $reportQueryDateTimeEnd = $studentScoreResult["quizDateEnded"];
-                  $reportQueryLevelShortName = $studentScoreResult["levelShortName"];
-                  $reportQueryStatus = $studentScoreResult["studentQuizStatus"];
-                  $studentIndex = $studentScoreResult["studentIndex"];
+                                ", 2);
+                foreach ($learnerScoreQuery as $learnerScoreResult) {
+                  $reportQueryID = $learnerScoreResult["learnerQuizID"];
+                  $reportQueryLearnerIndex = $learnerScoreResult['learnerID'];
+                  $reportQueryLearnerScore = $learnerScoreResult['learnerQuizScore'];
+                  $reportQueryGroupName = $learnerScoreResult["groupShortName"];
+                  $reportQueryDateTimeStart = $learnerScoreResult["quizDateStarted"];
+                  $reportQueryDateTimeEnd = $learnerScoreResult["quizDateEnded"];
+                  $reportQueryStatus = $learnerScoreResult["learnerQuizStatus"];
                 ?>
                   <tr>
-                    <td class="text-center actions"><?php echo $reportQueryHouseShortName ?></td>
-                    <td class="text-center actions"><?php echo $reportQueryLevelShortName ?></td>
-                    <td class="text-center actions"><?php echo $reportQueryClassName ?></td>
-                    <td class="text-center actions"><?php echo $reportQueryStudentIndex ?></td>
-                    <td class="text-center actions"><?php if ($reportQueryDateTimeStart == null) {
+                    <td group="text-center actions"><?php echo $reportQueryGroupName ?></td>
+                    <td group="text-center actions"><?php echo $reportQueryLearnerIndex ?></td>
+                    <td group="text-center actions"><?php if ($reportQueryDateTimeStart == null) {
                                                       echo ('-');
                                                     } else {
                                                       echo mySQLDate($reportQueryDateTimeStart);
                                                     } ?></td>
-                    <td class="text-center actions"><?php if ($reportQueryStatus == 2) {
-                                                      echo '<span class="badge badge-success">' . "Completed" . '</span>';
+                    <td group="text-center actions"><?php if ($reportQueryStatus == 2) {
+                                                      echo '<span group="badge badge-success">' . "Completed" . '</span>';
                                                     } elseif ($reportQueryStatus == 1) {
-                                                      echo '<span class="badge badge-warning">' . "Timeout" . '</span>';
+                                                      echo '<span group="badge badge-warning">' . "Timeout" . '</span>';
                                                     } elseif ($reportQueryStatus == 0) {
-                                                      echo '<span class="badge badge-danger">' . "Incomplete" . '</span>';
+                                                      echo '<span group="badge badge-danger">' . "Incomplete" . '</span>';
                                                     } ?></td>
-                    <td class="text-center actions"><?php echo $reportQueryStudentScore ?></td>
+                    <td group="text-center actions"><?php echo $reportQueryLearnerScore ?></td>
                   </tr>
                 <?php
                 }
@@ -159,8 +111,8 @@ include 'assets/templates/dashboard/auth/header.php';
               <tfoot>
                 <tr>
                   <!---------- Total Score ---------->
-                  <th colspan="6" style="text-align:right" class="px-1">Total Score: </th>
-                  <th style="text-align:center" class="px-1"></th>
+                  <th colspan="4" style="text-align:right" group="px-1">Total Score: </th>
+                  <th style="text-align:center" group="px-1"></th>
                 </tr>
               </tfoot>
             </table>
@@ -169,7 +121,7 @@ include 'assets/templates/dashboard/auth/header.php';
       </div>
     </div>
   </div>
-  <div class="overlay"></div>
+  <div group="overlay"></div>
 
   <!---------- Footer Include ---------->
   <?php
@@ -185,7 +137,7 @@ include 'assets/templates/dashboard/auth/header.php';
       function(settings, data, dataIndex) {
         var min = minDate.val();
         var max = maxDate.val();
-        var date = new Date(data[4]);
+        var date = new Date(data[2]);
 
         if (
           (min === null && max === null) ||
@@ -209,25 +161,8 @@ include 'assets/templates/dashboard/auth/header.php';
         format: 'MMMM Do YYYY'
       });
 
-      //Filter 1 - Class
-      $('#reportClassFilter').on('change', function() {
-        if ((this).value == 'all') {
-          table
-            .columns(2)
-            .search("")
-            .draw();
-
-        } else {
-          table
-            .columns(2)
-            .search(this.value)
-            .draw();
-        }
-
-      });
-
-      //Filter 2 - House
-      $('#reportHouseFilter').on('change', function() {
+      //Filter 1 - Group
+      $('#reportGroupFilter').on('change', function() {
         if ((this).value == 'all') {
           table
             .columns(0)
@@ -240,22 +175,7 @@ include 'assets/templates/dashboard/auth/header.php';
             .search(this.value)
             .draw();
         }
-      });
 
-      //Filter 3 - Level
-      $('#reportLevelFilter').on('change', function() {
-        if ((this).value == 'all') {
-          table
-            .columns(1)
-            .search("")
-            .draw();
-
-        } else {
-          table
-            .columns(1)
-            .search(this.value)
-            .draw();
-        }
       });
 
       // Filter 4 / 5 Date Range Filter
@@ -274,15 +194,15 @@ include 'assets/templates/dashboard/auth/header.php';
 
         //Define Columns
         columnDefs: [{
-            "width": "14%",
-            "targets": [0, 1, 2, 3, 4]
-          },
-          {
             "width": "15%",
-            "targets": [5, 6]
+            "targets": [0, 1, 3, 4]
           },
           {
-            targets: [0],
+            "width": "40%",
+            "targets": [2]
+          },
+          {
+            targets: [2],
             type: 'date'
           }
         ],
@@ -298,7 +218,7 @@ include 'assets/templates/dashboard/auth/header.php';
 
           // Total over all pages
           total = api
-            .column(6)
+            .column(4)
             .data()
             .reduce(function(a, b) {
               return intVal(a) + intVal(b);
@@ -306,7 +226,7 @@ include 'assets/templates/dashboard/auth/header.php';
 
           // Total over this page
           pageTotal = api
-            .column(6, {
+            .column(4, {
               page: 'current'
             })
             .data()
@@ -315,7 +235,7 @@ include 'assets/templates/dashboard/auth/header.php';
             }, 0);
 
           // Update footer
-          $(api.column(6).footer()).html(pageTotal);
+          $(api.column(4).footer()).html(pageTotal);
         },
       });
     });
