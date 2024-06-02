@@ -21,3 +21,13 @@ DB::commit();
 
 sweetAlertTimerRedirect('Learner Deleted', 'Learner Successfully Deleted', 'success', (SITE_URL . "learner-summary")); // Updated success message and URL
 ?>
+
+if (isset($_GET["facilitatorID"])) {
+  DB::startTransaction();
+  DB::update('facilitator', [
+    'facilitatorStatus' => 0,
+  ], "facilitatorID=%i", $_GET["facilitatorID"]);
+  DB::commit();
+  sweetAlertTimerRedirect('Facilitator Deleted', 'Facilitator Successfully Removed', 'success', (SITE_URL . "facilitator-summary"));
+}
+?>

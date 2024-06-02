@@ -71,7 +71,7 @@ if (isset($_SESSION['companyID'])) {
                 <thead>
                   <tr>
                     <th class="border-bottom-0 text-center">Group</th>
-                    <th class="border-bottom-0 text-center">Index Number</th>
+                    <th class="border-bottom-0 text-center">Learner</th>
                     <th class="border-bottom-0 text-center">Date</th>
                     <th class="border-bottom-0 text-center">Status</th>
                     <th class="border-bottom-0 text-center">Points</th>
@@ -80,7 +80,7 @@ if (isset($_SESSION['companyID'])) {
                 <tbody id="reportTableBody">
                   <?php
                   //Query the entire report from database
-                  $learnerScoreQuery = DB::query("SELECT learner.learnerID, learnerQuiz.learnerQuizStatus,learnerQuiz.learnerQuizID, MAX(learnerQuiz.learnerQuizScore) AS learnerQuizScore, DATE(learnerQuiz.learnerQuizDateTimeEnded) AS quizDateEnded, DATE(learnerQuiz.learnerQuizDateTimeStarted) AS quizDateStarted, learnerGroup.groupShortName 
+                  $learnerScoreQuery = DB::query("SELECT learner.learnerName,learner.learnerID, learnerQuiz.learnerQuizStatus,learnerQuiz.learnerQuizID, MAX(learnerQuiz.learnerQuizScore) AS learnerQuizScore, DATE(learnerQuiz.learnerQuizDateTimeEnded) AS quizDateEnded, DATE(learnerQuiz.learnerQuizDateTimeStarted) AS quizDateStarted, learnerGroup.groupShortName 
                                 FROM learnerQuiz 
                                 INNER JOIN learner ON learnerQuiz.learnerID = learner.learnerID 
                                 INNER JOIN learnerGroup ON learner.groupID = learnerGroup.groupID 
@@ -91,6 +91,7 @@ if (isset($_SESSION['companyID'])) {
                   foreach ($learnerScoreQuery as $learnerScoreResult) {
                     $reportQueryID = $learnerScoreResult["learnerQuizID"];
                     $reportQueryLearnerIndex = $learnerScoreResult['learnerID'];
+                    $reportQueryLearnerName = $learnerScoreResult["learnerName"];
                     $reportQueryLearnerScore = $learnerScoreResult['learnerQuizScore'];
                     $reportQueryGroupName = $learnerScoreResult["groupShortName"];
                     $reportQueryDateTimeStart = $learnerScoreResult["quizDateStarted"];
@@ -99,7 +100,7 @@ if (isset($_SESSION['companyID'])) {
                   ?>
                     <tr>
                       <td class="text-center actions"><?php echo $reportQueryGroupName ?></td>
-                      <td class="text-center actions"><?php echo $reportQueryLearnerIndex ?></td>
+                      <td class="text-center actions"><?php echo $reportQueryLearnerName ?></td>
                       <td class="text-center actions"><?php if ($reportQueryDateTimeStart == null) {
                                                         echo ('-');
                                                       } else {

@@ -34,7 +34,7 @@ include 'assets/templates/dashboard/auth/header.php';
               <option value="all">All Learner Groups</option>
               <?php
               // Replace with your database query to retrieve learner group data
-              $learnerGroupQuery = DB::query("SELECT * from learnerGroup WHERE groupStatus=%i", 1);
+              $learnerGroupQuery = DB::query("SELECT * from learnerGroup WHERE groupStatus=%i", 2);
               foreach ($learnerGroupQuery as $learnerGroupResult) {
                 $learnerGroupName = $learnerGroupResult["groupName"];
               ?>

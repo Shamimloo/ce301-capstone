@@ -89,19 +89,27 @@ if (isset($_POST["addLearner"])) {
                   break;
                 }
 
-                // Check for duplicate entries in the first column
-                $convertCol1 = (int)$getData[0];
-                if (in_array($convertCol1, $firstColumnEntries)) {
-                  $errorspotted = 6; // A new error code for duplicate entries in the CSV.
-                  break;
-                } else {
-                  $firstColumnEntries[] = $convertCol1;
+                // Skip empty rows
+                if (empty(array_filter($getData))) {
+                  continue;
                 }
+
+                // // Check for duplicate entries in the first column
+                // $convertCol1 = (int)$getData[0];
+                // if (in_array($convertCol1, $firstColumnEntries)) {
+                //   // $errorspotted = 6; // A new error code for duplicate entries in the CSV.
+                //   break;
+                // } else {
+                //   $firstColumnEntries[] = $convertCol1;
+                // }
 
                 // If no errors for this row, store in valid entries
                 $validEntries[] = [
                   'learnerName' => $getData[0],
+                  'learnerStatus' => 2, // Set learner status to 2 by default
                   'groupID' => $addClassID,
+                  'learnerDateCreated' => date("Y-m-d H:i:s"),
+                  'learnerDateUpdated' => date("Y-m-d H:i:s"),
                 ];
               }
 

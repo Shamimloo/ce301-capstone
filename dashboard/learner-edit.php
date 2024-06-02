@@ -6,7 +6,7 @@ include 'assets/templates/dashboard/header.php';
 include 'assets/templates/dashboard/auth/header.php';
 ?>
 
-<body group="sidebar-expand">
+<body class="sidebar-expand">
   <!---------- Sidebar / Navbar Include ---------->
   <?php
   include 'assets/templates/dashboard/sidebar.php';
@@ -14,11 +14,11 @@ include 'assets/templates/dashboard/auth/header.php';
   ?>
 
   <!---------- Main Content ---------->
-  <div group="main">
-    <div group="main-content dashboard">
-      <div group="col-12 mt-5">
-        <div group="row">
-          <div group="col-12 box my-5">
+  <div class="main">
+    <div class="main-content dashboard">
+      <div class="col-12 mt-5">
+        <div class="row">
+          <div class="col-12 box my-5">
             <?php
 
             //Query the learner 
@@ -26,8 +26,6 @@ include 'assets/templates/dashboard/auth/header.php';
             foreach ($learnerDBQuery as $learnerDBQueryResult) {
               $learnerDBQueryID = $learnerDBQueryResult["learnerID"];
               $learnerDBQueryName = $learnerDBQueryResult["learnerName"];
-              $learnerDBQueryIndex = $learnerDBQueryResult["learnerIndex"];
-              $learnerDBQueryYear = $learnerDBQueryResult["learnerYear"];
               $learnerDBQueryStatus = $learnerDBQueryResult["learnerStatus"];
               $learnerDBQueryGroup = $learnerDBQueryResult["groupID"];
             }
@@ -37,7 +35,6 @@ include 'assets/templates/dashboard/auth/header.php';
 
               //ISSET POST form - Filter Inputs
               $editLearnerName = filterInput($_POST["editLearnerName"]);
-              $editLearnerIndex = filterInput($_POST["editLearnerIndex"]);
 
 
               //ISSET POST - Status Add DropDown field
@@ -56,7 +53,7 @@ include 'assets/templates/dashboard/auth/header.php';
 
 
               //check if required inputs are not empty
-              if ($editLearnerName == "" ||  $editLearnerIndex == "") {
+              if ($editLearnerName == "") {
                 authErrorMsg("Please fill up all the required fields.");
               } else {
                 //Update learner in DB
@@ -81,20 +78,20 @@ include 'assets/templates/dashboard/auth/header.php';
             ?>
 
             <!---------- Main Title ---------->
-            <div group="p-3 py-5">
-              <div group="d-flex justify-content-between align-items-center mb-30">
-                <h4 group="text-right">Add New</h4>
+            <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center mb-30">
+                <h4 class="text-right">Add New</h4>
               </div>
 
               <!---------Form ---------->
               <form method="POST">
-                <div group="mt-10">
-                  <label for="editLearnerName" group="labels">Name*</label>
-                  <input type="text" name="editLearnerName" id="editLearnerName" group="form-control" placeholder="Enter learner name" value="<?php echo $learnerDBQueryName ?>">
+                <div class="mt-10">
+                  <label for="editLearnerName" class="labels">Name*</label>
+                  <input type="text" name="editLearnerName" id="editLearnerName" class="form-control" placeholder="Enter learner name" value="<?php echo $learnerDBQueryName ?>">
                 </div>
-                <div group="row">
-                  <div group="col-lg-4 col-md-4 col-sm-12 mt-30"><label group="labels">Status*</label>
-                    <br><select group="form-select form-select-option" name="editLearnerStatus" aria-label="Default select example">
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-12 mt-30"><label class="labels">Status*</label>
+                    <br><select class="form-select form-select-option" name="editLearnerStatus" aria-label="Default select example">
                       <option disabled>Actions: </option>
                       <option <?php if ($learnerDBQueryStatus == 2) {
                                 echo 'selected';
@@ -104,12 +101,12 @@ include 'assets/templates/dashboard/auth/header.php';
                               } ?> value="1">Inactive</option>
                     </select>
                   </div>
-                  <div group="col-lg-4 col-md-4 col-sm-12 mt-30">
-                    <label for="editGroupID" group="labels">Group*</label> <br>
-                    <select group="form-select form-select-option" name="editGroupID" id="editGroupID">
+                  <div class="col-lg-4 col-md-4 col-sm-12 mt-30">
+                    <label for="editGroupID" class="labels">Group*</label> <br>
+                    <select class="form-select form-select-option" name="editGroupID" id="editGroupID">
                       <option disabled>Select Learner Group: </option>
                       <?php
-                      $queryDBGroup = DB::query("SELECT * FROM `group` WHERE groupStatus=%i", 2);
+                      $queryDBGroup = DB::query("SELECT * FROM `learnerGroup` WHERE groupStatus=%i", 2);
                       //Populate all the possible active groupes
                       foreach ($queryDBGroup as $queryDBGroupResults) {
                         $queryDBGroupID = $queryDBGroupResults["groupID"];
@@ -126,9 +123,9 @@ include 'assets/templates/dashboard/auth/header.php';
                 </div>
 
                 <!--------- Actionables ---------->
-                <div group="d-flex align-items-center justify-content-end mt-40">
-                  <a href="<?php echo SITE_URL . "learner-summary" ?>" group="btn-tertiary link-grey">Cancel</a>
-                  <button group="btn btn-primary profile-button ml-50" name="editLearner" type="submit">Update Learner</button>
+                <div class="d-flex align-items-center justify-content-end mt-40">
+                  <a href="<?php echo SITE_URL . "learner-summary" ?>" class="btn-tertiary link-grey">Cancel</a>
+                  <button class="btn btn-primary profile-button ml-50" name="editLearner" type="submit">Update Learner</button>
                 </div>
               </form>
             </div>
@@ -138,7 +135,7 @@ include 'assets/templates/dashboard/auth/header.php';
     </div>
   </div>
 
-  <div group="overlay"></div>
+  <div class="overlay"></div>
 
   <!---------- Footer Include ---------->
   <?php
